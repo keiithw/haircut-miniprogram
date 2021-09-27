@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>数据统计</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui1.css" media="all">
+    <link rel="stylesheet" href="/layui/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/layui/css/public.css" media="all">
+</head>
+<style>
+    .layui-top-box {padding:40px 20px 20px 20px;color:#fff}
+    .panel {margin-bottom:17px;background-color:#fff;border:1px solid transparent;border-radius:3px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+    .panel-body {padding:15px}
+    .panel-title {margin-top:0;margin-bottom:0;font-size:14px;color:inherit}
+    .label {display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em;margin-top: .3em;}
+    .layui-red {color:red}
+    .main_btn > p {height:40px;}
+</style>
+<body>
+<div class="layui-layout layui-layout-admin">
+    
+
+    <div class="layuimini-container">
+
+        <div class="layuimini-main layui-top-box">
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-md3" >
+                    <a href="/user/userManage">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-cyan">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-blue">实时</span>
+                                    <h5>服务数目</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" th:text="${serveCount}+'个'">1234</h1>
+                                    <div class="stat-percent font-bold text-gray" th:text="${serveCount}+'个'"> 1234</div>
+                                    <small>当前分类总记录数</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="layui-col-md3">
+                    <a href="/user/userManage">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-blue">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-cyan">实时</span>
+                                    <h5>待服务预约</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" th:text="${waitingApm}+'单'">1234</h1>
+                                    <div class="stat-percent font-bold text-gray" th:text="${waitingApm}+'单'">1234</div>
+                                    <small>当前分类总记录数</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="layui-col-md3">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-green">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-orange">实时</span>
+                                    <h5>累积交易额</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" th:text="'￥'+${totalIncome}">1234</h1>
+                                    <div class="stat-percent font-bold text-gray" th:text="'￥'+${totalIncome}"> 1234</div>
+                                    <small>当前分类总记录数</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3">
+                    <div class="col-xs-6 col-md-3">
+                        <div class="panel layui-bg-orange">
+                            <div class="panel-body">
+                                <div class="panel-title">
+                                    <span class="label pull-right layui-bg-green">实时</span>
+                                    <h5>评论总数</h5>
+                                </div>
+                                <div class="panel-content">
+                                    <h1 class="no-margins" th:text="${reviewCount}+'条'">1234</h1>
+                                    <div class="stat-percent font-bold text-gray" th:text="${reviewCount}+'条'"><i class="fa fa-commenting"></i> 1234</div>
+                                    <small>当前分类总记录数</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-box">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12">
+                    <blockquote class="layui-elem-quote main_btn">
+                        <p>本系统是我的毕业设计。基于Spring Boot进行实现</p>
+                        <p>我的新博客：<a href="http://36.111.35.133:8090/">博客地址</a></p>
+                        <p>此美容美发服务预约系统技术栈：</p>
+                        <p>  --Spring Boot</p>
+                        <p>  --微信小程序</p>
+                        <p>  --Mysql、redis</p>
+                        <p>  --Jquery、LayUI、IViewUI、VantUi</p>
+                        <p>  --阿里云OSS、极光短信服务...</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-box">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>昵称</th>
+                            <th>时间</th>
+                            <th>评论title</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="review,reviewStat : ${reviewList}">
+                            <td th:text="${review.customerName}">贤心</td>
+                            <td th:text="${review.date}">2016-11-29</td>
+                            <td th:text="${review.title}">人生就像是一场修行</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-col-md6">
+                    <ul class="layui-timeline">
+                        <li class="layui-timeline-item" th:each="mb,iterStat:${mvpMembers}">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title" th:text="${iterStat.index+1}+'.'+${mb.name}">姓名</h3>
+                                <p style=" font-size: 18px; line-height: 33px;">
+                                <span>ta在这个月辛勤付出,完成了<span class="layui-badge layui-bg-blue" th:text="${mb.getFinDeal()}">蓝</span>个订单，</span>
+                                    <br><span>ta为团队带来的收益达到<span class="layui-badge layui-bg-green" th:text="${mb.totalBenefit}">绿</span>元,'</span>
+                                <br th:if="${mb.goodComment}!=0"><span th:if="${mb.goodComment}!=0">顾客都为ta的技艺精湛的服务点赞，ta得到了<span class="layui-badge layui-bg-cyan" th:text="${mb.goodComment}">青</span>个好评。</span>
+                                <br><span> ta以ta的敬业、热情获得本月<span th:each="obj:${mb.title}">
+                                <span class="layui-badge" th:text="${obj}">赤</span></span>称号。
+                                </span>
+                                <i class="layui-icon"></i>
+                                </p>
+                            </div>
+                        </li>
+
+                        <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <div class="layui-timeline-title">百舸争流，奋楫者先;千帆竟发，勇进者胜。</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/layui/layui.js" charset="utf-8"></script>
+    <script src="/js/jquery/jquery-3.3.1.min.js"></script>
+<script>
+    layui.use('layer',function(){
+        var layer = layui.layer;
+        layer.ready(function(){
+            layer.msg('您已进入页面了！');
+            var id = 4;
+            console.log(id);
+            // $.ajax({
+            //     url:"传",
+            //     data:{'id':id},
+            //     type:"Post",
+            //     dataType:"json",
+            //     success:function(data){
+            //         console.log(data);
+            //         layer.msg(data.msg);
+            //         location.reload(); //删除成功后再刷新
+            //     },
+            //     error:function(data){
+            //         $.messager.alert('错误',data.msg);
+            //     }
+            // });
+            layer.close(index);
+
+        });
+
+    });
+</script>
+
+</div>
+</body>
+</html>

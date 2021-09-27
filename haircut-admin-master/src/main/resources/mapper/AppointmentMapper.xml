@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haiyu.manager.dao.AppointmentMapper" >
+  <resultMap id="BaseResultMap" type="com.haiyu.manager.pojo.Appointment" >
+    <id column="aid" property="aid" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR" />
+    <result column="customer_avatar" property="customerAvatar" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="server_id" property="serverId" jdbcType="INTEGER" />
+    <result column="server_name" property="serverName" jdbcType="VARCHAR" />
+    <result column="barber_id" property="barberId" jdbcType="INTEGER" />
+    <result column="barber_avatar" property="barberAvatar" jdbcType="VARCHAR" />
+    <result column="barber_phone" property="barberPhone" jdbcType="VARCHAR" />
+    <result column="barber_name" property="barberName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="segment" property="segment" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="noon" property="noon" jdbcType="INTEGER" />
+    <result column="noonName" property="noonname" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="is_review" property="isReview" jdbcType="INTEGER" />
+    <result column="is_notice" property="isNotice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    aid,rid, customer_id, customer_name, customer_phone, customer_avatar, sid, store_name,
+    server_id, server_name, barber_id, barber_avatar, barber_phone, barber_name, price, 
+    status, note, segment, day, time, noon, noonName, created_time,is_review,is_notice
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haiyu.manager.pojo.example.AppointmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from appointment
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from appointment
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haiyu.manager.pojo.example.AppointmentExample" >
+    delete from appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haiyu.manager.pojo.Appointment" >
+    insert into appointment (aid,rid, customer_id, customer_name,
+      customer_phone, customer_avatar, sid, 
+      store_name, server_id, server_name, 
+      barber_id, barber_avatar, barber_phone, 
+      barber_name, price, status, 
+      note, segment, day, 
+      time, noon, noonName, 
+      created_time,is_review,is_notice)
+    values (#{aid,jdbcType=INTEGER},#{rid,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR},
+      #{customerPhone,jdbcType=VARCHAR}, #{customerAvatar,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
+      #{storeName,jdbcType=VARCHAR}, #{serverId,jdbcType=INTEGER}, #{serverName,jdbcType=VARCHAR}, 
+      #{barberId,jdbcType=INTEGER}, #{barberAvatar,jdbcType=VARCHAR}, #{barberPhone,jdbcType=VARCHAR}, 
+      #{barberName,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{segment,jdbcType=INTEGER}, #{day,jdbcType=TIMESTAMP}, 
+      #{time,jdbcType=TIMESTAMP}, #{noon,jdbcType=INTEGER}, #{noonname,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}),#{isReview,jdbcType=INTEGER},#{isNotice,jdbcType=INTEGER}
+  </insert>
+  <insert id="insertSelective" parameterType="com.haiyu.manager.pojo.Appointment" >
+    insert into appointment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        aid,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerPhone != null" >
+        customer_phone,
+      </if>
+      <if test="customerAvatar != null" >
+        customer_avatar,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="serverId != null" >
+        server_id,
+      </if>
+      <if test="serverName != null" >
+        server_name,
+      </if>
+      <if test="barberId != null" >
+        barber_id,
+      </if>
+      <if test="barberAvatar != null" >
+        barber_avatar,
+      </if>
+      <if test="barberPhone != null" >
+        barber_phone,
+      </if>
+      <if test="barberName != null" >
+        barber_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="segment != null" >
+        segment,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="noon != null" >
+        noon,
+      </if>
+      <if test="noonname != null" >
+        noonName,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="isReview != null" >
+        is_review,
+      </if>
+      <if test="isNotice != null" >
+        is_notice,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null" >
+        #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAvatar != null" >
+        #{customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="serverName != null" >
+        #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="barberId != null" >
+        #{barberId,jdbcType=INTEGER},
+      </if>
+      <if test="barberAvatar != null" >
+        #{barberAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="barberPhone != null" >
+        #{barberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="segment != null" >
+        #{segment,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noon != null" >
+        #{noon,jdbcType=INTEGER},
+      </if>
+      <if test="noonname != null" >
+        #{noonname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReview != null" >
+        #{isReview,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null" >
+        #{isNotice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haiyu.manager.pojo.example.AppointmentExample" resultType="java.lang.Integer" >
+    select count(*) from appointment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update appointment
+    <set >
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerPhone != null" >
+        customer_phone = #{record.customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerAvatar != null" >
+        customer_avatar = #{record.customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeName != null" >
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverId != null" >
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverName != null" >
+        server_name = #{record.serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barberId != null" >
+        barber_id = #{record.barberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.barberAvatar != null" >
+        barber_avatar = #{record.barberAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barberPhone != null" >
+        barber_phone = #{record.barberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barberName != null" >
+        barber_name = #{record.barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.segment != null" >
+        segment = #{record.segment,jdbcType=INTEGER},
+      </if>
+      <if test="record.day != null" >
+        day = #{record.day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.noon != null" >
+        noon = #{record.noon,jdbcType=INTEGER},
+      </if>
+      <if test="record.noonname != null" >
+        noonName = #{record.noonname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isReview != null" >
+        is_review = #{record.isReview,jdbcType=INTEGER},
+      </if>
+      <if test="record.isNotice != null" >
+        is_notice = #{record.isNotice,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update appointment
+    set aid = #{record.aid,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      customer_phone = #{record.customerPhone,jdbcType=VARCHAR},
+      customer_avatar = #{record.customerAvatar,jdbcType=VARCHAR},
+      sid = #{record.sid,jdbcType=INTEGER},
+      store_name = #{record.storeName,jdbcType=VARCHAR},
+      server_id = #{record.serverId,jdbcType=INTEGER},
+      server_name = #{record.serverName,jdbcType=VARCHAR},
+      barber_id = #{record.barberId,jdbcType=INTEGER},
+      barber_avatar = #{record.barberAvatar,jdbcType=VARCHAR},
+      barber_phone = #{record.barberPhone,jdbcType=VARCHAR},
+      barber_name = #{record.barberName,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR},
+      segment = #{record.segment,jdbcType=INTEGER},
+      day = #{record.day,jdbcType=TIMESTAMP},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      noon = #{record.noon,jdbcType=INTEGER},
+      noonName = #{record.noonname,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+    is_review = #{record.isReview,jdbcType=INTEGER},
+    is_notcie = #{record.isNotice,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haiyu.manager.pojo.Appointment" >
+    update appointment
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null" >
+        customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAvatar != null" >
+        customer_avatar = #{customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="serverId != null" >
+        server_id = #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="serverName != null" >
+        server_name = #{serverName,jdbcType=VARCHAR},
+      </if>
+      <if test="barberId != null" >
+        barber_id = #{barberId,jdbcType=INTEGER},
+      </if>
+      <if test="barberAvatar != null" >
+        barber_avatar = #{barberAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="barberPhone != null" >
+        barber_phone = #{barberPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        barber_name = #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="segment != null" >
+        segment = #{segment,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noon != null" >
+        noon = #{noon,jdbcType=INTEGER},
+      </if>
+      <if test="noonname != null" >
+        noonName = #{noonname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReview != null" >
+        is_review = #{isReview,jdbcType=INTEGER},
+      </if>
+      <if test="isNotice != null" >
+        is_notice = #{isNotice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haiyu.manager.pojo.Appointment" >
+    update appointment
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      customer_avatar = #{customerAvatar,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=INTEGER},
+      rid = #{rid,jdbcType=INTEGER},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      server_id = #{serverId,jdbcType=INTEGER},
+      server_name = #{serverName,jdbcType=VARCHAR},
+      barber_id = #{barberId,jdbcType=INTEGER},
+      barber_avatar = #{barberAvatar,jdbcType=VARCHAR},
+      barber_phone = #{barberPhone,jdbcType=VARCHAR},
+      barber_name = #{barberName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      segment = #{segment,jdbcType=INTEGER},
+      day = #{day,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=TIMESTAMP},
+      noon = #{noon,jdbcType=INTEGER},
+      noonName = #{noonname,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      is_review = #{isReview,jdbcType=INTEGER},
+      is_notice = #{isNotice,jdbcType=INTEGER}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+
+  <select id="getFutureAppointment" parameterType="com.haiyu.manager.pojo.Appointment" resultType="com.haiyu.manager.pojo.Appointment">
+    SELECT
+    appointment.aid,
+    appointment.sid,
+    appointment.customer_id,
+    appointment.customer_name,
+    appointment.customer_phone,
+    appointment.server_name,
+    appointment.server_id,
+    appointment.barber_id,
+    appointment.barber_name,
+    appointment.`status`,
+    appointment.`day`,
+    appointment.price,
+    appointment.note,
+    appointment.is_review
+    FROM
+    appointment
+    where sid = #{sid}
+    <if test="status!=null&amp;&amp;status!=''">
+    and  `status`=#{status}
+    </if>
+    <if test="aid!=null&amp;&amp;aid!=''">
+     and aid = #{aid}
+    </if>
+    <if test="customerPhone!=null&amp;&amp;customerPhone!=''">
+     and customer_phone = #{customerPhone}
+    </if>
+    <if test="barberId!=null&amp;&amp;barberId!=''">
+     and barber_id = #{barberId}
+    </if>
+    <if test="startTime1!=null">
+      and day &gt; #{startTime1}
+    </if>
+    <if test="endTime1!=null">
+      and day &lt; #{endTime1}
+    </if>
+    ORDER BY DATE (`day`) , segment DESC,created_time
+  </select>
+  
+  <select id="selectToNoticeApm" resultType="com.haiyu.manager.pojo.Appointment">
+    SELECT
+    appointment.aid,
+    appointment.customer_phone,
+    appointment.customer_name,
+    appointment.sid,
+    appointment.server_name,
+    appointment.barber_phone,
+    appointment.barber_name,
+    appointment.`status`,
+    appointment.is_notice,
+    appointment.created_time
+    FROM
+    appointment
+    WHERE
+    appointment.day BETWEEN #{start} AND #{end}
+    and
+    `status` = -1 and is_notice = 0
+  </select>
+
+  <select id="selectOverTimeApm" resultType="com.haiyu.manager.pojo.Appointment">
+    SELECT
+    appointment.aid,
+    appointment.customer_phone,
+    appointment.customer_name,
+    appointment.sid,
+    appointment.barber_phone,
+    appointment.barber_name,
+    appointment.`status`,
+    appointment.is_notice,
+    appointment.created_time
+    FROM
+    appointment
+    WHERE
+    appointment.day &lt; #{start} and
+    `status` = -1
+  </select>
+
+  <select id="getAvgPrice" parameterType="INTEGER" resultType="DOUBLE">
+    SELECT AVG(price) from appointment where sid = #{sid} and status = 2
+  </select>
+
+  <select id="totalIncome" parameterType="INTEGER" resultType="INTEGER">
+    SELECT SUM(price) from appointment where sid = #{sid} and status = 2
+  </select>
+
+  <select id="selectEarlierApm" resultType="INTEGER">
+    SELECT count(1) FROM `appointment` where barber_id = #{bid} and day &lt; #{day} and status in ('-1','1')
+  </select>
+
+</mapper>

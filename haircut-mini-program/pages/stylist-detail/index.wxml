@@ -1,0 +1,51 @@
+<import src='../../template/statistics.wxml'/>
+
+<view>
+  <view class='header-bg'>
+    <view  class='header-inner'>
+      <v-avatar type='circle' src='{{profilePhoto}}' size='250' v-class='avatar-class'></v-avatar>
+      <view class='stylist-name'>{{name}}</view>
+      <v-divider>手艺担当</v-divider>
+    </view>
+
+    <view class='flex justify-between header-bottom'>
+      <view class='address'>
+        <view>{{storeName}}</view>
+      </view>
+
+      <view class='flex column align-end'>
+        <view class='flex align-center'>
+           <view wx:if="{{star==0}}"><i-icon type="collection" data-id="{{}}" class="star" bindtap="star"/></view>
+           <view wx:elif="{{star==1}}"><i-icon type="collection_fill" data-id="{{}}" class="star" bindtap="unstar" /></view>
+          <v-icon icon='icon-question' type='info' v-class='question-icon'></v-icon>
+          <!-- <<v-price type='info' format='0' v-class='origin-price'  price='{{stylist.originPrice}}'></v-price>
+          <v-price price='{{stylist.price}}'  font-size='38'></v-price>> -->
+          <view class="contact">联系手机:{{phone}}</view>
+        </view>
+        <v-tag type='success' v-class='workyear-class' text='8年工作经验'>8年工作经验</v-tag>
+      </view>
+    </view>
+  </view>
+
+  <v-card v-class='flex column align-center'>
+    <v-tabs active='{{curActive}}' v-class='tabs-class' gutter='0' sticky>
+       <v-tab key='0' bindtap="introduce" title='个人介绍'></v-tab>
+        <v-tab key='1' bindtap="review" title='服务评价'></v-tab>
+        <!-- <v-tab key='2' title='TA的作品'></v-tab> -->
+    </v-tabs>
+    <block wx:if="{{curActive==0}}">
+    <view class="introduce">
+    <view  class='card-title'>你好啊~</view>
+      <view><text class="content">{{introduce}}</text></view>
+    </view>
+    </block>
+    <block  wx:if="{{curActive==1}}">
+
+
+    <rate list='{{rateList}}' style="width:99%"></rate>
+    <v-button type='primary' size='small' bindtap="moreReview"  v-class='button-class'>全部评论</v-button>
+    </block>
+    
+    
+  </v-card>
+</view>

@@ -1,0 +1,5 @@
+
+<view class="tab-item" style="color:{{active?color[type]:''}};width:{{width}}rpx;" bindtap='handleClickItem' >
+  {{title}}
+  <view class="tab-bar__active" wx:if="{{ active }}" style="background:{{ color[type] }}"></view>
+</view>

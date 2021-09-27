@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-panel": "/pages/vant/panel/index",
+      "van-button": "/pages/vant/button/index",
+      "van-field": "/pages/vant/field/index",
+      "van-cell-group": "/pages/vant/cell-group/index",
+      "van-row": "/pages/vant/row/index",
+      "van-col": "/pages/vant/col/index",
+      "i-rate": "../dist/rate/index",
+      "van-uploader": "/pages/vant/uploader/index",
+      "v-button": "/components/v-button/index"
+  }
+}

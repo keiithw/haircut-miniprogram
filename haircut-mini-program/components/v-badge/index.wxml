@@ -1,0 +1,1 @@
+<view class='v-class v-badge' style="width:{{size}}rpx;height:{{size}}rpx;line-height:{{size}}rpx;background:{{type=='error'?color.error:''}}">{{value}}</view>

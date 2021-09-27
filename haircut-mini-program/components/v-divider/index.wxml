@@ -1,0 +1,7 @@
+<view class='v-divider'>
+  <view class='v-divider-before'></view>
+  <view class='v-divider-text'>
+    <slot></slot>
+  </view>
+  <view class='v-divider-after'></view>
+</view>

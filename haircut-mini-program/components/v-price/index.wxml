@@ -1,0 +1,13 @@
+<view class='price v-class' wx:if="{{!showDecimal}}" style="color:{{color[type]}}">
+  <text class='symbol' wx:if="{{mode == 'RMB'}}" style="font-size:{{fontSize}}rpx;">¥</text>
+  <text wx:if="{{type == 'UMB'}}" style="font-size:{{fontSize}}rpx;">$</text>
+  <text class='price-text' style="font-size:{{fontSize}}rpx;">{{price}}</text>
+  <text class='decimal' wx:if="{{showDecimal}}">.0</text>
+</view>
+
+<view class='price v-class' wx:else style="color:{{color[type]}}">
+  <text class='symbol' wx:if="{{mode == 'RMB'}}" style="font-size:{{fontSize}}rpx;">¥</text>
+  <text wx:if="{{mode == 'UMB'}}" style="font-size:{{fontSize}}rpx;">$</text>
+  <text class='price-text' style="font-size:{{fontSize}}rpx;">{{int}}</text>
+  <text class='decimal'>.{{dec}}</text>
+</view>

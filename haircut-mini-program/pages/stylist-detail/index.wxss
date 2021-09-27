@@ -1,0 +1,91 @@
+@import '/template/statistics.wxss';
+
+.header-bg{
+  width: 100%;
+ height: 883rpx;
+  background: url('https://keithw-bucket.oss-cn-shenzhen.aliyuncs.com/images/u%3D1078291466%2C563815961%26fm%3D26%26gp%3D0.jpg') no-repeat;
+  background-position: top left;
+  background-size: 750rpx auto;
+  background-color: white;
+  position: relative;
+  margin-bottom: 40rpx;
+}
+
+.contact{
+  color: whitesmoke
+}
+.star view{
+font-size: 34px!important;
+float: right;
+margin-right: 86rpx;
+position: relative;
+top: -726rpx;
+right: -414rpx;
+
+}
+
+.introduce{
+  margin: 0 50rpx;
+margin-bottom: 60rpx;
+
+}
+.card-title{
+  padding: 50rpx 0 60rpx; 
+}
+
+.content {
+  padding-left: 25rpx;
+  font-size: 26rpx;
+}
+
+.address{
+  color: whitesmoke;
+  position: relative;
+top: -20px;
+right: -508rpx;
+}
+
+.header-inner{
+ padding: 180rpx 180rpx 0;
+}
+
+.stylist-name{
+  text-align: center;
+  color:white;
+  font-size: 60rpx;
+  margin-bottom: 15rpx;
+  width: 419rpx;
+
+}
+
+.avatar-class{
+  margin:0 auto 25rpx;
+  box-shadow: 4rpx 4rpx 16rpx rgba(0, 0, 0, 0.5);
+  width: 118px;
+height: 118px;
+
+}
+
+.header-bottom{
+  position: absolute;
+  bottom:0;
+  left: 32rpx;
+  right: 32rpx;
+}
+
+.question-icon,.origin-price{
+  margin-right: 15rpx;
+}
+
+.workyear-class{
+  text-align: right;
+  margin-top: 18rpx;
+}
+
+
+.button-class{
+  margin-top: 45rpx;
+  margin-bottom: 45rpx;
+  align-self: center;
+}
+

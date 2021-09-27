@@ -1,0 +1,14 @@
+.price{
+  font-size: 0;
+}
+
+.price-text{
+  /* font-size: 32rpx; */
+}
+.symbol{
+  /* font-size: 32rpx; */
+  padding-right: 8rpx;
+}
+.decimal{
+  font-size: 24rpx;
+}

@@ -1,0 +1,6 @@
+<view class='card v-class'>
+  <view class='card-title' wx:if="{{title != ''}}" style="padding-left:{{titlePadding?'32rpx;':''}}">{{title}}</view>
+  <slot></slot>
+  <!-- <view class='card-title' wx:if="{{secondTitle != ''}}">{{secondTitle}}</view>
+  <slot name='second'></slot> -->
+</view>

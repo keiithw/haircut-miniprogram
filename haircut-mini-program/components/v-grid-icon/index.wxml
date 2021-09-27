@@ -1,0 +1,1 @@
+<view class="v-class v-grid-icon"><slot></slot></view>

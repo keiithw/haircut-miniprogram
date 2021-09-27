@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="/css/formSelects-v4.css"/>
+<head th:include="layout :: htmlhead" th:with="title='角色管理'"></head>
+<script type="text/javascript" src="/js/dateUtils.js"></script>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body layui-anim layui-anim-upbit" data-anim="layui-anim-upbit"  style="margin: 1%">
+        <table id="commonList" lay-filter="commonTable">
+        <input type="hidden" id="sid" name="sid" th:value="${sid}"/>
+        <input type="hidden" id="uid" name="uid" th:value="${uid}"/>
+        <script type="text/html" id="optBar">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+<!--            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+            <a class="layui-btn-primary layui-btn-xs" lay-event="online">上线</a>
+            <a class="layui-btn-primary layui-btn-xs" lay-event="offline">下线</a>
+        </script>
+        </table>
+    </div>
+
+    <!--添加或编辑-->
+    <div id="setData" class="layer_self_wrap" style="width:500px;display:none;">
+        <form id="commonForm" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+            <input id="pageNum" type="hidden" name="pageNum"/>
+            <input id="fuckId" type="hidden" name="id"/>
+            <input type="hidden" id="barberId" name="barberId"/>
+            <div class="layui-form-item">
+                <label class="layui-form-label">服务</label>
+                <div class="layui-input-inline">
+                    <select name="serveIds" xm-select-search="" xm-select="serveIds">
+                        <!--<option value="1">北京</option>
+                        <option value="2">上海</option>
+                        <option value="3">广州</option>
+                        <option value="4">深圳</option>
+                        <option value="5">天津</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 10px;">
+                    <button class="layui-btn"  lay-submit="" lay-filter="commonSubmit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script>
+        /**
+         * 角色管理
+         */
+//'formSelects.render('permissions');
+        var pageCurr;
+        var form;
+
+        $(function() {
+
+            layui.use('table', function(){
+                var table = layui.table;
+                form = layui.form;
+                let sid = $('#sid').val();
+                let id = $('#uid').val();
+                console.log(sid);
+                tableIns=table.render({
+                    elem: '#commonList',
+                    url:'/serve/getBarberWithServe?sid='+sid+'&id='+id,
+                    method: 'get', //默认：get请求
+                    cellMinWidth: 80,
+                    page: true,
+                    request: {
+                        pageName: 'pageNum', //页码的参数名称，默认：pageNum
+                        limitName: 'pageSize' //每页数据量的参数名，默认：pageSize
+                    },
+                    response:{
+                        statusName: 'code', //数据状态的字段名称，默认：code
+                        statusCode: 200, //成功的状态码，默认：0
+                        countName: 'totals', //数据总数的字段名称，默认：count
+                        dataName: 'list' //数据列表的字段名称，默认：data
+                    },
+                    cols: [
+                        [
+                        {type:'numbers'}
+                        ,{field:'id', title:'id',align:'center',hide:true}
+                        ,{field:'barberId', title:'人员id',align:'center',hide:true}
+                        ,{field:'barberName', title:'人员名称',align:'center'}
+                        ,{field:'serveIds', title:'ids',align:'center',hide:true}
+                        ,{field:'serveNames', title:'服务名',align:'center'}
+                        ,{field:'isOnline', title:'在线状态',align:'center'}
+                        ,{fixed:'right',title:'操作',align:'center', toolbar:'#optBar'}
+                    ]
+                    ],
+                    done: function(res, curr, count){
+                        pageCurr=curr;
+                        $("[data-field='isOnline']").children().each(function(){
+                            if($(this).text()=='1'){
+                                $(this).text("在线")
+                            }else if($(this).text()=='0'){
+                                $(this).text("离线")
+                            }
+                        })
+                    }
+                });
+
+
+                //监听工具条
+                table.on('tool(commonTable)', function(obj){
+                    var data = obj.data;
+                    if(obj.event === 'del'){
+                        //删除
+                        del(data,data.id);
+                    } else if(obj.event === 'edit'){
+                        //编辑
+                        console.log("data...");
+                        console.log(data);
+                        $("#fuckId").val(data.id);
+                        $("#serveIds").val(data.serveIds) ;
+                        $("#barberId").val(data.barberId);
+                        edit(data,data.id);
+                    }else if(obj.event === 'recover'){
+                        //恢复
+                        recover(data,data.id);
+                    }else if (obj.event === 'online'){
+                        $.get(
+                            "/user/online?userId="+data.barberId,
+                            "get",
+                            function(dataa){
+                            alert("上线成功");
+                            obj.tr.find('td').eq(6).find('div').text("在线");
+                            console.log()
+                            },
+                            "json"
+                        );
+                    }else if (obj.event === 'offline'){
+                        $.get(
+                            "/user/offline?userId="+data.barberId,
+                            "get",
+                            function(dataa){
+                                alert("已下线");
+                                obj.tr.find('td').eq(6).find('div').text("离线");
+                                console.log()
+                            },
+                            "json"
+                        );
+                    }
+                });
+
+                //监听提交
+                form.on('submit(commonSubmit)', function(data){
+                    formSubmit(data);
+                    return false;
+                });
+
+            });
+
+        });
+
+        //提交表单
+        function formSubmit(obj){
+            $.ajax({
+                type: "post",
+                data: $("#commonForm").serialize(),
+                url: "/serve/setForTony",
+                success: function (data) {
+                    if (data.code === 200) {
+                        layer.alert(data.msg,function(){
+                            layer.closeAll();
+                            load(obj);
+                        });
+                    } else {
+                        layer.alert(data.msg);
+                    }
+                },
+                error: function () {
+                    layer.alert("操作请求错误，请您稍后再试",function(){
+                        layer.closeAll();
+                        load(obj);
+                    });
+                }
+            });
+        }
+
+        //新增
+        function add() {
+            edit(null,"新增");
+        }
+        //打开编辑框
+        function edit(data,title){
+            var serveId = null;
+            //回显数据
+
+
+            formSelects.data('serveIds', 'server', {
+                url: '/serve/listAll?sid='+$('#sid').val(),
+                keyName: 'name',
+                keyVal: 'id',
+                success: function(id, url, searchVal, result){      //使用远程方式的success回调
+                    console.log(serveId);
+                    if(serveId != null){
+                        var assistAuditArry =serveId.split(",");
+                        formSelects.value('serveIds', assistAuditArry);
+                    }
+
+                    console.log(result);    //返回的结果
+                },
+                error: function(id, url, searchVal, err){           //使用远程方式的error回调
+                    //同上
+                    console.log(err);   //err对象
+                },
+            });
+
+
+            var pageNum = $(".layui-laypage-skip").find("input").val();
+            $("#pageNum").val(pageNum);
+
+            layer.open({
+                type:1,
+                title: title,
+                fixed:false,
+                resize :false,
+                shadeClose: true,
+                area: ['550px','550px'],
+                content:$('#setData'),
+                end:function(){
+                    clean();
+                }
+            });
+        }
+
+        //重新加载table
+        function load(obj){
+            tableIns.reload({
+                where: obj.f
+                , page: {
+                    curr: pageCurr //从当前页码开始
+                }
+            });
+        }
+
+        //删除
+        function delRole(obj,id) {
+            if(null!=id){
+                layer.confirm('您确定要删除吗？', {
+                    btn: ['确认','返回'] //按钮
+                }, function(){
+                    $.post("/role/updateRoleStatus",{"id":id,"status":0},function(data){
+                        if (data.code == 1) {
+                            layer.alert(data.msg,function(){
+                                layer.closeAll();
+                                load(obj);
+                            });
+                        } else {
+                            layer.alert(data.msg);
+                        }
+                    });
+                }, function(){
+                    layer.closeAll();
+                });
+            }
+        }
+
+
+
+        function clean() {
+            $("#id").val("");
+            $("#servesIds").val("");
+        }
+
+
+    </script>
+
+</div>
+</body>
+</html>

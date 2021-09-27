@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haiyu.manager.dao.ReviewMapper" >
+  <resultMap id="BaseResultMap" type="com.haiyu.manager.pojo.Review" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="stars" property="stars" jdbcType="INTEGER" />
+    <result column="serve_name" property="serveName" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_avatar" property="customerAvatar" jdbcType="VARCHAR" />
+    <result column="barber_name" property="barberName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rid, uid, bid, sid, stars, serve_name, customer_name, customer_avatar, barber_name, 
+    title, content, photo, date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haiyu.manager.pojo.example.ReviewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from review
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from review
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haiyu.manager.pojo.example.ReviewExample" >
+    delete from review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haiyu.manager.pojo.Review" useGeneratedKeys="true" keyProperty="rid">
+    insert into review ( uid, bid,
+      sid, stars, serve_name, 
+      customer_name, customer_avatar, barber_name, 
+      title, content, photo, 
+      date)
+    values ( #{uid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER},
+      #{sid,jdbcType=INTEGER}, #{stars,jdbcType=INTEGER}, #{serveName,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{customerAvatar,jdbcType=VARCHAR}, #{barberName,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haiyu.manager.pojo.Review" >
+    insert into review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="stars != null" >
+        stars,
+      </if>
+      <if test="serveName != null" >
+        serve_name,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerAvatar != null" >
+        customer_avatar,
+      </if>
+      <if test="barberName != null" >
+        barber_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stars != null" >
+        #{stars,jdbcType=INTEGER},
+      </if>
+      <if test="serveName != null" >
+        #{serveName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAvatar != null" >
+        #{customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haiyu.manager.pojo.example.ReviewExample" resultType="java.lang.Integer" >
+    select count(*) from review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update review
+    <set >
+      <if test="record.rid != null" >
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stars != null" >
+        stars = #{record.stars,jdbcType=INTEGER},
+      </if>
+      <if test="record.serveName != null" >
+        serve_name = #{record.serveName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerAvatar != null" >
+        customer_avatar = #{record.customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barberName != null" >
+        barber_name = #{record.barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update review
+    set rid = #{record.rid,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      bid = #{record.bid,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      stars = #{record.stars,jdbcType=INTEGER},
+      serve_name = #{record.serveName,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      customer_avatar = #{record.customerAvatar,jdbcType=VARCHAR},
+      barber_name = #{record.barberName,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haiyu.manager.pojo.Review" >
+    update review
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="stars != null" >
+        stars = #{stars,jdbcType=INTEGER},
+      </if>
+      <if test="serveName != null" >
+        serve_name = #{serveName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerAvatar != null" >
+        customer_avatar = #{customerAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="barberName != null" >
+        barber_name = #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haiyu.manager.pojo.Review" >
+    update review
+    set uid = #{uid,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      stars = #{stars,jdbcType=INTEGER},
+      serve_name = #{serveName,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_avatar = #{customerAvatar,jdbcType=VARCHAR},
+      barber_name = #{barberName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+
+  <select id="getSimpleReview" parameterType="INTEGER" resultType="com.haiyu.manager.pojo.Review">
+    SELECT
+    review.rid,
+    review.stars,
+    review.serve_name,
+    review.customer_name,
+    review.customer_avatar,
+    review.barber_name,
+    review.title,
+    review.content,
+    review.photo,
+    review.date
+    FROM
+    review
+    WHERE
+    review.sid = #{sid}
+    order by review.date DESC
+    LIMIT 1
+  </select>
+  <select id="getSimpleBarberReview" parameterType="INTEGER" resultType="com.haiyu.manager.pojo.Review">
+    SELECT
+    review.rid,
+    review.stars,
+    review.serve_name,
+    review.customer_name,
+    review.customer_avatar,
+    review.barber_name,
+    review.title,
+    review.content,
+    review.photo,
+    review.date
+    FROM
+    review
+    WHERE
+    review.bid = #{bid}
+    order by review.date DESC
+    LIMIT 1
+  </select>
+  <select id="getBarberReview" parameterType="INTEGER" resultType="com.haiyu.manager.pojo.Review">
+    SELECT
+    review.rid,
+    review.stars,
+    review.serve_name,
+    review.customer_name,
+    review.customer_avatar,
+    review.barber_name,
+    review.title,
+    review.content,
+    review.photo,
+    review.date
+    FROM
+    review
+    WHERE
+    review.bid = #{sid}
+    order by review.date DESC
+  </select>
+  <select id="getStoreReview" parameterType="INTEGER" resultType="com.haiyu.manager.pojo.Review">
+    SELECT
+    review.rid,
+    review.stars,
+    review.serve_name,
+    review.customer_name,
+    review.customer_avatar,
+    review.barber_name,
+    review.title,
+    review.content,
+    review.photo,
+    review.date
+    FROM
+    review
+    WHERE
+    review.sid = #{sid}
+    order by review.date DESC
+  </select>
+  <select id="pageStoreReview" parameterType="com.haiyu.manager.pojo.Review" resultType="com.haiyu.manager.pojo.Review">
+    SELECT
+    review.rid,
+    review.customer_name,
+    review.barber_name,
+    review.serve_name,
+    review.title,
+    review.content,
+    review.date,
+    review.stars
+    FROM
+    review
+    <where>
+    <if test="bid != null" >
+      bid = #{bid}
+    </if>
+    <if test="endTime != null" >
+      AND date &lt; #{endTime}
+    </if>
+    <if test="startTime != null" >
+      AND date > #{startTime}
+    </if>
+      <if test="sid != null" >
+        AND sid = #{sid}
+      </if>
+      <if test="serveName != null" >
+        AND serve_name = #{serveName}
+      </if>
+    </where>
+  </select>
+
+  <select id="getQueuedNumber" parameterType="INTEGER" resultType="INTEGER">
+    SELECT COUNT(1) from appointment WHERE `status` = 1 AND sid = #{sid}
+  </select>
+
+  <select id="getStoreMark" parameterType="INTEGER" resultType="DOUBLE">
+     select AVG(stars) from review where sid = #{sid}
+  </select>
+
+  <select id="getBarberMark" parameterType="INTEGER" resultType="DOUBLE">
+     select AVG(stars) from review where bid = #{bid}
+  </select>
+
+  <select id="getLatest5" parameterType="INTEGER" resultType="com.haiyu.manager.pojo.Review">
+     select customer_name,date,title from review where sid = #{sid} order by date desc
+  </select>
+</mapper>

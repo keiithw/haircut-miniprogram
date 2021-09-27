@@ -1,0 +1,58 @@
+.header-bg{
+  width: 100%;
+  background: url('https://keithw-bucket.oss-cn-shenzhen.aliyuncs.com/images/20161208023928sl1vyuifyek42012.jpg') no-repeat;
+height: 578rpx;
+  background-position: top left;
+  background-size: 750rpx auto;
+  background-color: white;
+}
+
+Page{
+  background: white
+}
+.user{
+  width: 617rpx;
+  height: 327rpx;
+  position: absolute;
+  top:180rpx;
+  left:50%;
+  border-radius: 8%;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  transform: translate(-50%,0);
+}
+
+.avatar-class{
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top:-20rpx;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+.usr-info{
+  padding-top: 180rpx;
+}
+
+.phone{
+  padding-bottom:22rpx;
+}
+
+.name{
+  font-size: 45rpx;
+  color:#534d6c;
+}
+
+.prefix{
+  color:#e2e0e4;
+  font-size: 28rpx;
+  position: absolute;
+  right: 37rpx;
+  bottom:37rpx;
+}
+
+.prefix-bottom{
+  margin-bottom: 15rpx;
+}
+
+.item-class {
+  padding-bottom:65rpx;
+}

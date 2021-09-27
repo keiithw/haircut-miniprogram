@@ -1,0 +1,3 @@
+<!--pages/stylists/index.wxml-->
+<hair-stylist price="{{price}}" sid="{{sid}}" storeName="{{storeName}}" serveId="{{serveId}}" serveName="{{serveName}}" list="{{list}}"></hair-stylist>
+

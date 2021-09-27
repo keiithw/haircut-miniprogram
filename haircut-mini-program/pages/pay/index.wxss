@@ -1,0 +1,57 @@
+/* pages/pay/index.wxss */
+Page{
+  background: white
+}
+
+#img{
+  text-align: center;
+width: 381rpx;
+height: 269rpx;
+}
+
+#imgView{
+  text-align: center;
+  margin-top: 89rpx;
+
+}
+#zhifu{
+  text-align: center;
+margin-top: 23rpx;
+font-weight: 641;
+font-size: 45rpx;
+}
+
+#price{
+text-align: center;
+margin-top: 111rpx;
+font-size: 105rpx;
+font-weight: 600;
+}
+
+#ptx{
+  font-size: 56rpx;
+top: -13rpx;
+position: relative;
+
+}
+
+#buttonGrp{
+  width: 46%;
+margin: 200rpx auto;
+
+}
+
+.comment{
+  border-radius: 47rpx;
+width: 299rpx;
+text-align: center;
+font-size: 28rpx;
+font-weight: 500;
+}
+.back{
+    border-radius: 47rpx;
+width: 299rpx;
+text-align: center;
+font-size: 28rpx;
+font-weight: 500;
+}

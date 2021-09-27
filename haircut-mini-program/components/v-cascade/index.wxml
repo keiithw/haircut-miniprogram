@@ -1,0 +1,11 @@
+<cover-view class='cascade'>
+  <cover-view class='cascade-search'>
+    <cover-view class='search-adress'>
+      <cover-view>{{currentCity}}</cover-view>
+      <cover-view class='cuIcon icon-unfold'></cover-view>
+    </cover-view>
+
+    <v-input type='text' bindtap='onInput'></v-input>
+    <cover-view class='search-button'>关闭</cover-view>
+  </cover-view>
+</cover-view>

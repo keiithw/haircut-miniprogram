@@ -1,0 +1,22 @@
+.card{
+  margin-left: 17rpx;
+margin-right: 17rpx;
+margin-top: 23rpx;
+margin-bottom: 20rpx;
+background: white;
+box-sizing: border-box;
+border-radius: 20rpx!important;
+  box-shadow: 1px 3rpx 10rpx rgba(0, 0, 0, 0.1)!important;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-title{
+  font-size: 36rpx;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+/* .card-full{
+  
+} */

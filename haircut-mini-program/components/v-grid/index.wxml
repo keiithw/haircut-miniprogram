@@ -1,0 +1,1 @@
+<view class="v-class v-grid" style="grid-template-columns: repeat({{col}},1fr);grid-row-gap:{{rowGutter}}rpx;grid-column-gap:{{colGutter}}rpx;{{border?'border-top:1rpx solid rgba(0, 0, 0, .1);border-left:1rpx solid rgba(0, 0, 0, .1)':''}}"><slot></slot></view>

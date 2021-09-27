@@ -1,0 +1,102 @@
+@import 'common/main.wxss';
+@import 'common/icon.wxss';
+
+page{
+  background-color: #eceff1
+}
+.scrollPage {
+  height: 100vh;
+}
+
+.bg-white{
+  background-color: white;
+}
+
+.card-title {
+  font-size:36rpx;
+  font-weight:600;
+  align-self:flex-start;
+}
+
+.text-white{
+  color:white
+}
+
+.text-gray{
+  color:#a1a1a1
+}
+
+.text-center{
+  text-align: center;
+}
+
+
+.sub-title{
+  align-self: flex-start;
+  font-size: 28rpx;
+  padding-top:30rpx;
+}
+
+
+/*=========
+ 字体 
+========= */
+.font-xs{
+  font-size: 22rpx;
+}
+
+.font-sm{
+  font-size: 24rpx;
+}
+
+.font-md{
+  font-size: 26rpx;
+}
+
+.font-lg{
+  font-size: 32rpx;
+}
+
+.font-name{
+  font-size: 60rpx;
+}
+/*=========
+ 内边距
+========= */
+.p-t-15{
+  padding-top: 15rpx;
+}
+
+.p-l-15{
+  padding-left: 15rpx;
+}
+
+.p-r-15{
+  padding-right: 15rpx;
+}
+
+.p-t-15{
+  padding-bottom: 15rpx;
+}
+
+/*  */
+
+.p-t-20{
+  padding-top: 20rpx;
+}
+
+.p-l-20{
+  padding-left: 20rpx;
+}
+
+.p-r-20{
+  padding-right: 20rpx;
+}
+
+.p-t-20{
+  padding-bottom: 20rpx;
+}
+
+
+
+

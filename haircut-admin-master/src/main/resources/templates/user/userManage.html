@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='用户管理'"></head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body layui-anim layui-anim-upbit" data-anim="layui-anim-upbit" style="margin: 1%" >
+
+        <form id="userSearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input id="sysUserName" name="sysUserName" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+                <label class="layui-form-label">手机号</label>
+                <div class="layui-input-inline">
+                    <input id="userPhone" name="userPhone" autocomplete="off" class="layui-input" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                           onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                </div>
+            </div>
+
+            <input id="sid" name="sid" th:value="${userMap.sid}" autocomplete="off" class="layui-input" type="hidden"/>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">注册时间</label>
+                        <div class="layui-input-inline" style="width: 175px;">
+                            <input  name="startTime" id="startTime"  autocomplete="off" class="layui-input" type="text"/>
+                        </div>
+                    <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 175px;">
+                            <input name="endTime" id="endTime"  autocomplete="off" class="layui-input" type="text"/>
+                        </div>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    <button class="layui-btn"  lay-submit="" lay-filter="searchSubmit">提交</button>
+                </div>
+            </div>
+        </form>
+
+        <!--<hr class="layui-bg-blue"/>-->
+        <hr class="layui-bg-black"/>
+
+        <button class="layui-btn layui-btn-normal" onclick="addUser()">开通用户</button>
+
+        <div style="display:none;" id="currentUser"><shiro:principal property="id"></shiro:principal></div>
+
+        <table id="uesrList" lay-filter="userTable"></table>
+
+        <script type="text/html" id="optBar">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            {{#  if(d.userStatus == '0'){ }}
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="recover">恢复</a>
+            {{#  } else { }}
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            {{#  } }}
+        </script>
+    </div>
+
+
+    <!--添加或编辑用户-->
+    <div id="setUser" class="layer_self_wrap" style="width:500px;display:none;">
+        <form id="userForm" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+            <input id="pageNum" type="hidden" name="pageNum"/>
+            <input id="fuckId" type="hidden" name="id"/>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input id="username" name="sysUserName" lay-verify="required" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="showimage">选择文件</button>
+                    </div>
+                    <img src="" id="picture" width="94">
+                    <input id="path" class="layui-form-mid" name="profilePhoto" autocomplete="off" type="hidden"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色类型</label>
+                <div class="layui-input-inline">
+                    <select name="roleId"  id="roleId" >
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号</label>
+                <div class="layui-input-inline">
+                    <input id="mobile" name="userPhone" lay-verify="required" autocomplete="off" class="layui-input" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                           onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input id="password" name="sysUserPwd" autocomplete="off" class="layui-input" type="password" placeholder="默认初始密码：123456" />
+            </div>
+            <div class="layui-form-mid layui-word-aux">请填写6位以上的密码</div>
+        </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否店铺</label>
+                <div class="layui-input-block" onclick="OnClickHandler(this)">
+                    <input type="radio" class="isShopCheck" name="isShop" value="0" title="否" checked>
+                    <input type="radio" class="isShopCheck" name="isShop" value="1" title="是" >
+                </div>
+            </div>
+            <!--如果不是店铺类型 则把sid赋值-->
+            <input id="sidInput" type="hidden" name="sid" th:value="${userMap.sid}"  />
+
+
+            <div class="layui-form-item" id="sex">
+                <label class="layui-form-label">性别</label>
+                <label class="layui-input-inline">
+                    <select name="sex" lay-verify="" >
+                        <option value="">选择性别</option>
+                        <option value="0">女</option>
+                        <option value="1">男</option>
+                    </select>
+                </label>
+            </div>
+            <div class="layui-form-item" id="birthday">
+                <label class="layui-form-label" >生日</label>
+                <div class="layui-input-inline">
+                    <input name="birthday"  autocomplete="off" class="layui-input" type="date"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item" id="rate" >
+                <label class="layui-form-label">增值比</label>
+                <div class="layui-input-inline">
+                    <input name="rate"  autocomplete="off" class="layui-input" placeholder="如99,100" type="text"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item"  id="address">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-inline">
+                    <input name="address" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item" id="positionContainer" style="display: none">
+                <label class="layui-upload" style="float: left;">
+                    <button type="button" class="layui-btn layui-btn-normal" id="positbn" onclick="showPosition()"
+                            style="padding: 0 27px!important;">获取位置</button>
+                </label>
+                <!--                <div class="layui-input-inline">-->
+                <!--                    <input id="positionCallback" autocomplete="off" class="layui-input" type="text"/>-->
+                <!--                </div>-->
+                <div class="layui-form-mid layui-word-aux" id="positionText" style="padding: 9px 17px!important;">定位位置</div>
+                <input id="longitude" class="layui-form-mid" name="longitude" autocomplete="off" type="hidden"/>
+                <input id="latitude" class="layui-form-mid" name="latitude" autocomplete="off" type="hidden"/>
+
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">介绍</label>
+                <div class="layui-input-block">
+                    <input name="introduce" id="introduce" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 10px;">
+                    <button class="layui-btn "  lay-submit="" lay-filter="userSubmit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="/js/dateUtils.js"></script>
+    <script src="/js/sysUser/userList.js"></script>
+    <script>
+    layui.use('upload', function(){
+        let upload = layui.upload;
+        //执行实例
+        let uploadInst = upload.render({
+            elem: '#showimage' //绑定元素
+            ,url: 'http://localhost:8102/user/uploadPhoto' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                console.log("ok")
+                layer.alert("上传成功")
+                $('#path').val(res.path)
+                $('#picture').attr('src',res.path)
+                console.log($('#path').val())
+                //res.data 是个map path : "asdq4wadd";
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    });
+    </script>
+
+    <!--    是否商家按钮逻辑处理  -->
+    <script>
+        function OnClickHandler(obj){
+            //
+            let tempSid = $("#sidInput").val();
+            if($('.layui-input-block input:radio[name="isShop"]:checked').val()==='0'){
+                //添加的不是商家
+                $("#sidInput").val(tempSid);
+                console.log("selected");
+                $("#sex").fadeIn();
+                $("#birthday").fadeIn();
+                $("#positionContainer").fadeOut();
+                $("#address").fadeOut();
+                $("#rate").fadeIn();
+            }else{
+                //是商家
+                $("#sidInput").val("");
+                $("#sex").fadeOut();
+                $("#birthday").fadeOut();
+                $("#positionContainer").fadeIn(1000);
+                $("#address").fadeIn();
+                $("#rate").fadeOut();
+            }
+        }
+    </script>
+
+    <script>
+        function showPosition() {
+            // 获取当前经纬度坐标
+            getPosition().then(result => {
+                // 返回结果示例：
+                // {latitude: 30.318030999999998, longitude: 120.05561639999999}
+                // 一般小数点后只取六位，所以用以下代码搞定
+                let queryData = {
+                    longitude: String(result.longitude).match(/\d+\.\d{0,6}/)[0],
+                    latitude: String(result.latitude).match(/\d+\.\d{0,6}/)[0],
+                    channelType: '00'
+                };
+                console.log(queryData);
+                // 以下放置获取坐标后你要执行的代码:
+                // ...
+                $('#positbn').addClass("layui-btn-disabled");
+                $('#positbn').addClass("layui-btn");
+                $('#positionText').text("经度："+queryData.longitude+"° ，"+"纬度："+queryData.latitude+"°")
+                $('#longitude').val(queryData.longitude);
+                $('#latitude').val(queryData.latitude);
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    </script>
+
+
+    <script>
+        function getPosition () {
+            return new Promise((resolve, reject) => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        let latitude = position.coords.latitude
+                        let longitude = position.coords.longitude
+                        let data = {
+                            latitude: latitude,
+                            longitude: longitude
+                        }
+                        console.log(data)
+                        resolve(data)
+                    }, function () {
+                        reject(arguments)
+                    })
+                } else {
+                    reject('你的浏览器不支持当前地理位置信息获取')
+                }
+            })
+        }
+    </script>
+</div>
+<script src="/layui/layui.js"></script>
+</body>
+</html>

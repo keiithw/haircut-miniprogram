@@ -1,0 +1,60 @@
+<block wx:for="{{list}}" wx:key="id">
+  <v-card v-class='stylist'>
+
+    <!-- 头像 -->
+    <v-avatar bindtap="goDetail" src='{{item.profilePhoto}}' data-item="{{item}}" size='150' v-class='avatar'></v-avatar>
+
+    <!-- 基本信息 -->
+    <view class='stylist-msg' bindtap="goDetail" data-item="{{item}}" >
+      <view class='stylist-name'>{{item.sysUserName}}</view>
+      <view class='stylist-price'>
+        <v-price price="{{price*item.rate/100|Int}}" format='1' v-class='price-left' type='error'></v-price>
+        <v-price price="{{price}}" format='0' type='info'></v-price>
+
+        <v-icon icon='icon-question' v-class='question' catchtap='showQuestion'></v-icon>
+        
+      </view>
+      <view>评分: <block wx:if="{{item.mark == null}}">5.0</block><block wx:if="{{item.mark != null}}">{{item.mark}}</block></view>
+
+      <!-- 多少人正在剪发 -->
+      <view class='cutting-list'>
+        <block wx:for="{{item.cutting}}" wx:key>
+          <v-icon icon='icon-moon' color='#333'></v-icon>
+        </block>
+      </view>
+      <view class='work-time'  wx:if="{{item.working == 0}}">休息中</view>
+      <view class='work-time'  wx:if="{{item.working == 1}}">在线</view>
+    </view>
+
+  <block wx:if="{{item.working == 1}}">
+    <v-button type='primary' size='normal' v-class='take-button button-a' bindtap='handleModal'>立即取号</v-button>
+   </block>
+     <v-button type='primary' size='normal' v-class='take-button button-b' data-barberId='{{item.id}}' data-barberName='{{item.sysUserName}}' data-userphone="{{item.userPhone}}" data-profile="{{item.profilePhoto}}" bindtap='openCalendar'>预约时间</v-button>
+
+    
+    <v-button type='info' wx:if="{{item.woking == 0}}" size='normal' v-class='take-button'>休息中</v-button>
+  </v-card>
+</block>
+
+<v-modal show="{{showModal}}" bind:confirm="closeModal" v-class='modal-class' title='确认取号'>
+  <view class='select-stylist'>
+    <view class='select-stylist-info'>
+      <v-avatar size='150' src='/common/images/avatar.jpg'></v-avatar>
+      <view class='info'>
+        <text class='name'>Robi</text>
+        <v-price type='default' format='1' price='38' v-class='select-stylist-price'></v-price>
+      </view>
+    </view>
+
+    <view class='address'>
+      <view class='select-store-name'>白易广场工作室</view>
+      <view class='distant'>195m</view>
+    </view>
+  </view>
+
+  <v-tip v-class='select-tip'>过号需重新取号，建议您提前到店等候</v-tip>
+
+  
+</v-modal>
+
+

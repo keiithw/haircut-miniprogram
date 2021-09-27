@@ -1,0 +1,241 @@
+/* ==================
+        初始化
+ ==================== */
+
+page {
+  background-color: #E2E7F3; /* #E2E7F3 */
+  font-size: 28rpx;
+  color: #333;
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  /* 全局css变量 */
+  --purple: #8f74fa;
+  --red: #ff3d3d;
+  --gray: #999999;
+  --blue: #474579;
+  --light-purple: #c2b4fc;
+  --border: #f2f2f8;
+  --gradualButton: linear-gradient(45deg, #9171fa, #8286fc);
+  --gradualTabs: linear-gradient(45deg, #9b5ff3, #8285fc);
+}
+
+view, scroll-view, swiper, button, input, textarea, label, navigator, image {
+  box-sizing: border-box;
+}
+
+.round {
+  border-radius: 5000rpx;
+}
+
+.radius {
+  border-radius: 6rpx;
+}
+
+/* ==================
+          边框
+ ==================== */
+
+/* -- 实线 -- */
+
+.solid, .solid-top, .solid-right, .solid-bottom, .solid-left, .solids,
+.solids-top, .solids-right, .solids-bottom, .solids-left, .dashed, .dashed-top,
+.dashed-right, .dashed-bottom, .dashed-left {
+  position: relative;
+}
+
+.solid::after, .solid-top::after, .solid-right::after, .solid-bottom::after,
+.solid-left::after, .solids::after, .solids-top::after, .solids-right::after,
+.solids-bottom::after, .solids-left::after, .dashed::after, .dashed-top::after,
+.dashed-right::after, .dashed-bottom::after, .dashed-left::after {
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.solid::after {
+  border: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-top::after {
+  border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-right::after {
+  border-right: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-bottom::after {
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-left::after {
+  border-left: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solids::after {
+  border: 8rpx solid #eee;
+}
+
+.solids-top::after {
+  border-top: 8rpx solid #eee;
+}
+
+.solids-right::after {
+  border-right: 8rpx solid #eee;
+}
+
+.solids-bottom::after {
+  border-bottom: 8rpx solid #eee;
+}
+
+.solids-left::after {
+  border-left: 8rpx solid #eee;
+}
+
+/* -- 虚线 -- */
+
+.dashed::after {
+  border: 1rpx dashed #ddd;
+}
+
+.dashed-top::after {
+  border-top: 1rpx dashed #ddd;
+}
+
+.dashed-right::after {
+  border-right: 1rpx dashed #ddd;
+}
+
+.dashed-bottom::after {
+  border-bottom: 1rpx dashed #ddd;
+}
+
+.dashed-left::after {
+  border-left: 1rpx dashed #ddd;
+}
+
+/* -- 阴影 -- */
+.shadow {
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+
+/* ==================
+         flex布局
+ ==================== */
+.flex{
+  display: flex;
+}
+
+.flex-sub{
+  flex: 1;
+}
+
+.flex-twice {
+  flex: 2;
+}
+
+.flex-treble{
+  flex: 3;
+}
+
+
+/* ==================
+         定位
+ ==================== */
+
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative
+}
+
+.absolute {
+  position: absolute;
+}
+
+.center{
+  transform: translate(-50%,-50%); 
+}
+
+.column{
+  flex-direction: column;
+}
+.flex-grow{
+  flex-grow: 1;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* 垂直方向 */
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* 相对本身垂直方向 */
+.self-start {
+  align-self: flex-start;
+}
+
+.self-center {
+  align-self: flex-center;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
+/* 整体对齐 */
+.align-start {
+  align-items:flex-start;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+/* 两端对齐 */
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+
+

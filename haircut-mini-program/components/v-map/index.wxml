@@ -1,0 +1,16 @@
+<view>
+  <map id='myMap' 
+  style="width: 100%; height:{{mapHeigth}};"
+  latitude="{{latitude}}"
+  longitude="{{longitude}}"
+  markers="{{markers}}"
+  show-location
+  enable-zoom
+  enable-scroll
+  scale='16'
+  bindmarkertap='handleMarker'
+  >
+  </map>
+  
+</view>
+

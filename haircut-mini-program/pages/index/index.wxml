@@ -1,0 +1,77 @@
+<!--index.wxml-->
+<view class="scrollPage">
+  <v-map markers="{{markers}}"></v-map>
+  <v-search city='深圳'></v-search>
+  <v-swiper list='{{banner}}'></v-swiper>
+
+
+  <i-toast id="toast" />
+  <store-list list='{{store}}'></store-list>
+
+
+    <!-- <navigator class="" target="" url="../store-detail/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        店铺详情
+      </button>
+   </navigator>
+
+     <navigator class="" target="" url="../full-map/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        宫格
+      </button>
+   </navigator>
+   
+    <navigator class="" target="" url="../stylist-detail/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        设计师介绍
+      </button>
+   </navigator>
+
+     <navigator class="" target="" url="../my-edit/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        个人编辑
+      </button>
+   </navigator>
+
+     <navigator class="" target="" url="../auth/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        授权登录
+      </button>
+   </navigator>
+
+   <navigator class="" target="" url="../stylists/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        设计师列表
+      </button>
+   </navigator>
+      <navigator class="" target="" url="../stylist-detail/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../stylist-detail/index'>
+        设计师详情
+      </button>
+   </navigator>
+
+    <navigator class="" target="" url="../pay/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        demo
+      </button>
+   </navigator>
+  
+      <navigator class="" target="" url="../calendar/calendar" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../my-edit/index'>
+        calendar
+      </button>
+   </navigator>
+
+      <navigator class="" target="" url="../review-create/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../review-create/index'>
+        create review
+      </button>
+   </navigator>
+    <navigator class="" target="" url="../review-list/index" hover-class="navigator-hover" open-type="navigate">
+      <button type="primary" na='../review-create/index'>
+        reviewlist
+      </button>
+   </navigator> -->
+  <!-- <v-button size='normal' type='primary' bind:click='handleClick'>显示</v-button>
+  <v-modal show='{{showModal}}'  bindconfirm='handleConfirm'></v-modal> -->
+</view>

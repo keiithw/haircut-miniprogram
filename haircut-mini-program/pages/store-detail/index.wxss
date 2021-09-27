@@ -1,0 +1,191 @@
+.store-info{
+  background: url(http://image.wujiyunhe.cn/images/store-bg.png) no-repeat;
+  background-position: top left;
+  background-size: 750rpx auto;
+  width: 100%;
+  height: 678rpx;
+  background-color: white;
+}
+
+.card{
+  border-radius: 18rpx!important;
+  box-shadow: 1px 3rpx 10rpx rgba(0, 0, 0, 0.1)!important;
+}
+.jump_list {
+  position: relative;
+  height: 100%;
+}
+
+.star view{
+font-size: 34px!important;
+float: right;
+margin-right: 86rpx;
+position: relative;
+top: -277rpx;
+
+}
+#content{
+  position: absolute;
+  top: 315rpx;
+  z-index: 3;
+  /* background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0),  linear-gradient(rgba（147,86,196,1)); */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.2) 98%, #FFFFFF 10%);
+
+  width: 100%;
+  padding-bottom: 16px;
+
+}
+
+#picture{
+  z-index: -1
+}
+.store-name,.store-time,.store-address,.store-discount{
+  padding-left: 70rpx;
+}
+
+.store-name{
+  padding-top: 60rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.store-time{
+  padding-top: 30rpx;
+}
+
+.store-address{
+  padding-top: 55rpx;
+}
+
+.store-discount{
+  padding-top: 45rpx;
+  font-size: 23rpx;
+}
+
+.tag-class{
+  margin-right: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.icon-calss{
+  padding-right: 0rpx;
+}
+
+
+
+.tabs-class{
+  margin-bottom: 30rpx;
+  background: white;
+}
+
+.server-rate{
+  padding:55rpx 0rpx 43rpx;
+}
+
+.detail-button{
+  margin-top: 30rpx;
+}
+
+.store-msg{
+  padding:55rpx 32rpx 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.tip{
+  font-size: 22rpx;
+  color:#999999;
+  margin-top: 30rpx;
+}
+
+.card-title{
+  padding: 50rpx 0 60rpx; 
+}
+
+.img-box{
+  width: 27px;
+  height: 27px;
+}
+
+
+.img-box.bg1 {
+ 
+  background-position: 0px 0px;
+  background-size: 81px 54px;
+}
+
+.img-box.bg2 {
+ 
+  background-position: -27px 0px;
+  background-size: 81px 54px;
+}
+
+.img-box.bg3 {
+  
+  background-position: 0px -27px;
+  background-size: 81px 54px;
+}
+
+.img-box.bg4 {
+
+  background-position: -27px -27px;
+  background-size: 81px 54px;
+}
+
+.img-box.bg5 {
+  
+  background-position: -54px 0px;
+  background-size: 81px 54px;
+}
+
+.img-box.bg6 {
+ 
+  background-position: -54px -27px;
+  background-size: 81px 54px;
+}
+
+.item-class {
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  padding-left: 25rpx;
+  font-size: 26rpx;
+}
+
+.gird-class{
+  padding-left: 30rpx;
+  padding-bottom: 60rpx;
+}
+
+.server{
+  width: 100%;
+  padding-top: 60rpx;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.server-info{
+  padding-bottom: 30rpx;
+}
+
+.server-text{
+  padding-right: 10rpx;
+}
+
+.code {
+  width: 250rpx;
+  height: 0;
+  background: url(http://image.wujiyunhe.cn/images/code.png) no-repeat;
+  background-size: 250rpx 250rpx;
+  transition: all  300ms linear;
+  transform-origin: 0 0;
+}
+
+.code.show{
+  height: 250rpx;
+}

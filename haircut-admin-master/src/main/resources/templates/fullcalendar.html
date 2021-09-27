@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang='en' xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8' />
+    <meta name="renderer" content="webkit">
+    <link rel="icon" href="/images/logo.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="/images/logo.jpg" type="image/x-icon" />
+    <link rel="Bookmark" th:href="@{/images/logo.png}" type="image/x-icon" />
+    <title>TONY造型后台管理系统</title>
+
+    <script type="text/javascript" src="/js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="/js/formSelects-v4.min.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css"></link>
+    <script src="/js/checkParam.js"></script>
+    <script src="/js/common.js"></script>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href='/fullcalendar/core/main.css'  />
+    <link rel="stylesheet" href='/fullcalendar/daygrid/main.css'  />
+    <link rel="stylesheet" href='/fullcalendar/timegrid/main.css' />
+    <link rel="stylesheet" href="/assets/common.css" media="all">
+
+    <style>
+        #calendar {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #external-events {
+            float: left;
+            width: 150px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            background: #eee;
+            text-align: left;
+        }
+
+        #external-events h4 span {
+            font-size: 16px;
+            margin-top: 0;
+            padding-top: 1em;
+        }
+
+        .external-event { /* try to mimick the look of a real event */
+            margin: 10px 0;
+            padding: 2px 4px;
+            background: #3366CC;
+            color: #fff;
+            font-size: .85em;
+            cursor: pointer;
+        }
+
+        /*日期控件*/
+        .layui-laydate-content>.layui-laydate-list {
+            padding-bottom: 0px;
+            overflow: hidden;
+        }
+        .layui-laydate-content>.layui-laydate-list>li{
+            width:50%
+        }
+
+        /* pop */
+        .popper,
+        .tooltip {
+            position: absolute;
+            z-index: 9999;
+            background: #FFC107;
+            color: black;
+            width: 150px;
+            border-radius: 3px;
+            box-shadow: 0 0 2px rgba(0,0,0,0.5);
+            padding: 10px;
+            text-align: center;
+        }
+        .style5 .tooltip {
+            background: #1E252B;
+            color: #FFFFFF;
+            max-width: 200px;
+            width: auto;
+            font-size: .8rem;
+            padding: .5em 1em;
+        }
+        .popper .popper__arrow,
+        .tooltip .tooltip-arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            position: absolute;
+            margin: 5px;
+        }
+
+        .tooltip .tooltip-arrow,
+        .popper .popper__arrow {
+            border-color: #FFC107;
+        }
+        .style5 .tooltip .tooltip-arrow {
+            border-color: #1E252B;
+        }
+        .popper[x-placement^="top"],
+        .tooltip[x-placement^="top"] {
+            margin-bottom: 5px;
+        }
+        .popper[x-placement^="top"] .popper__arrow,
+        .tooltip[x-placement^="top"] .tooltip-arrow {
+            border-width: 5px 5px 0 5px;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            bottom: -5px;
+            left: calc(50% - 5px);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .popper[x-placement^="bottom"],
+        .tooltip[x-placement^="bottom"] {
+            margin-top: 5px;
+        }
+        .tooltip[x-placement^="bottom"] .tooltip-arrow,
+        .popper[x-placement^="bottom"] .popper__arrow {
+            border-width: 0 5px 5px 5px;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            top: -5px;
+            left: calc(50% - 5px);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .tooltip[x-placement^="right"],
+        .popper[x-placement^="right"] {
+            margin-left: 5px;
+        }
+        .popper[x-placement^="right"] .popper__arrow,
+        .tooltip[x-placement^="right"] .tooltip-arrow {
+            border-width: 5px 5px 5px 0;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            left: -5px;
+            top: calc(50% - 5px);
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .popper[x-placement^="left"],
+        .tooltip[x-placement^="left"] {
+            margin-right: 5px;
+        }
+        .popper[x-placement^="left"] .popper__arrow,
+        .tooltip[x-placement^="left"] .tooltip-arrow {
+            border-width: 5px 0 5px 5px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            right: -5px;
+            top: calc(50% - 5px);
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+<head th:include="layout :: htmlhead" th:with="title='用户管理'">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+
+<div th:replace="fragments/calhead :: header"></div>
+</div>
+<input type="text" name="sid" id="sid" th:value="${sid}" hidden />
+<div class="layui-body layui-anim layui-anim-upbit" data-anim="layui-anim-upbit" style="margin: 1%" >
+<div class="layui-fluid">
+    <div class="layui-card" style="padding-top: 5px; margin-bottom: 8px;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12 layui-col-md2" style="margin-top: 120px">
+                <div id='external-events'>
+                    <h4>工作人员</h4>
+                <div th:each="stuff:${stuffs}">
+                    <div class="external-event" th:id="${stuffStat.index}" th:roomId="${stuff.getId()}" onclick="changeRoom(this.id)" th:text="${stuff.getSysUserName()}">名字</div>
+                </div>
+                <!--<#&#45;&#45;<div id="1" roomId="1" onclick="changeRoom(this.id)">会议室1</div>&ndash;&gt;-->
+                <!--<#&#45;&#45;<div id="2" roomId="2" onclick="changeRoom(this.id)">会议室2</div>&ndash;&gt;-->
+                <!--<#&#45;&#45;<div id="3" roomId="3" onclick="changeRoom(this.id)">会议室3</div>&ndash;&gt;-->
+                <!--<#&#45;&#45;<div id="4" roomId="4" onclick="changeRoom(this.id)">会议室4</div>&ndash;&gt;-->
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md10">
+            <div id='calendar' style="margin-top: 120px"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+<!-- 表单弹框 -->
+<script  type="text/html" id="calendarForm">
+    <form lay-filter="calendarForm" class="layui-form model-form">
+        <input name="id" id="id" type="hidden"/>
+        <input name="sid" th:value="${sid}" type="hidden"/>
+        <input name="barberId" id="barberId"  value="" type="hidden"/>
+        <input name="start" value="" type="hidden"/>
+        <input name="end" value="" type="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">工作人员</label>
+            <div class="layui-input-inline">
+                <input type="text" id="barberName" class="layui-input" name="barberName" lay-verify="required" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">事件</label>
+            <label class="layui-input-inline" >
+                <select name="title" lay-verify="" >
+                    <option value="">选择事件</option>
+                    <option value="工作">工作</option>
+                    <option value="请假">请假</option>
+                    <option value="迟到">迟到</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="layui-form-item" id="noon" >
+            <label class="layui-form-label">选择午别</label>
+            <label class="layui-input-inline" >
+                <select name="noon" lay-verify="" >
+                    <option value="">选择午别</option>
+                    <option value="1">上午</option>
+                    <option value="2">下午</option>
+                    <option value="3">夜间</option>
+                    <option value="4">全天</option>
+                </select>
+            </label>
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">时段最大可约数</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="interval_max" name="intervalMax" lay-verify="required" required>
+            </div>
+        </div>
+        <div class="layui-form-item" hidden>
+            <label class="layui-form-label">日期</label>
+            <div class="layui-input-block">
+                <input name="date" value="" class="layui-input" readonly />
+            </div>
+        </div>
+        <block th:if ="${isGranted} eq 1">
+        <div class="layui-form-item text-right">
+            <button class="layui-btn" lay-filter="formSubmit" lay-submit>保存</th:ifbutton>
+            <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+            <button class="layui-btn" type="button" id="delEdit" onclick="del()">删除</button>
+        </div>
+        </block>
+    </form>
+</script>
+
+<!-- js部分 -->
+<script>
+    $(document).ready(function(){
+        //通过$(document).ready(function(){})   简写 $(function(){})
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+        });
+        console.log("!!!!")
+    })
+
+
+</script>
+<script src='/fullcalendar/core/main.js'></script>
+<script src='/fullcalendar/core/locales-all.js'></script>
+<script src='/fullcalendar/daygrid/main.js'></script>
+<script src='/fullcalendar/interaction/main.js'></script>
+<script src='/fullcalendar/timegrid/main.js'></script>
+<script src='/fullcalendar/core/locales/zh-cn.js'></script>
+<!--<script src="/js/jquery/jquery-3.3.1.min.js"></script>-->
+<script src='/fullcalendar/popper.min.js'></script>
+<script src='/fullcalendar/tooltip.min.js'></script>
+
+<script type="text/javascript" src="/js/calendar/index.js"></script>
+
+</body>
+</html>

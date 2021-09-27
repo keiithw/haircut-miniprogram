@@ -1,0 +1,13 @@
+<!--pages/pay/index.wxml-->
+<view id="imgView">
+<image id="img" src="https://keithw-bucket.oss-cn-shenzhen.aliyuncs.com/images/1679504.jpg"></image>
+</view>
+<view id="zhifu">支付成功</view>
+<view id="price"><text id="ptx">￥</text>{{price}}.00</view>
+
+<view style="text-align:center">
+<view id="buttonGrp">
+<i-button bind:click="comment" i-class="comment" type="success">去评价</i-button>
+<i-button bind:click="back" i-class="back" type="ghost">返回</i-button>
+</view>
+</view>

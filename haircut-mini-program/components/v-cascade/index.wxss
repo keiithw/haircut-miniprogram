@@ -1,0 +1,59 @@
+/* @import '../../common/icon.wxss'; */
+
+.cascade{
+  position: fixed;
+  z-index: 1000;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  padding:0 20rpx;
+  box-sizing: border-box;
+}
+
+.cascade-search{
+  display: flex;
+  position: absolute;
+  top:40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 710rpx;
+  border-radius: 10rpx;
+  background: white;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.search-adress,.search-button{
+  height: 100%;
+  line-height: 80rpx;
+  width: 100rpx;
+  position: relative;
+  text-align: center;
+}
+
+.search-adress::after {
+  position: absolute;
+  content: ' ';
+  height: 80%;
+  top:10%;
+  left: 0;
+  width: 100%;
+  border-right: 1px solid rgba(0, 0, 0, .5)
+}
+
+.search-adress cover-view{
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.search-button::before {
+  position: absolute;
+  content: ' ';
+  height: 80%;
+  top:10%;
+  left: 0;
+  width: 100%;
+  border-left: 1px solid rgba(0, 0, 0, .2)
+}

@@ -1,0 +1,4 @@
+<text class='v-icon {{icon}} v-class' 
+style="color:{{type == 'info'?color.info:type == 'error'?color.error:type=='default'?color.default:''}};font-size:{{size}}rpx;">
+
+</text>

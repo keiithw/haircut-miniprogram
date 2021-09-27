@@ -1,0 +1,14 @@
+
+
+<view class="cell {{isLastCell?'cell-last':''}}" wx:if="{{isLink}}" bindtap='handleClick'>
+  <slot class='cell-title__icon'></slot>
+  <text class='cell-title'>{{label}}</text>
+  <text class="{{align == 'between'? 'cell-content__right':'cell-content'}}">{{value}}</text>
+  <text class='v-icon cuIcon icon-right cell-link'></text>
+</view>
+
+<view class="cell {{isLastCell?'cell-last':''}}" wx:else >
+  <slot class='cell-title__icon'></slot>
+  <text class='cell-title'>{{label}}</text>
+  <text class="{{align == 'between'? 'cell-content__right':'cell-content'}}">{{value}}</text>
+</view>

@@ -1,0 +1,39 @@
+<block wx:for="{{list}}" wx:for-item="item" wx:key>
+  <v-card v-class='store-list'>
+      <view class='store-title'>
+         <v-avatar type='circle' src='../../common/images/store.gif' size='200' v-class='avatar-class'></v-avatar>
+         <view class="storeName"> <i-icon style="position:relative;top:-5px" type="homepage_fill" size="29"/><text>{{item.sysUserName}}</text></view>
+       
+      </view>
+
+      <view class='price'>
+      <i-icon type="redpacket" style="position:relative; top:-1px" size="19"/>
+        <text class='server-item'>人均</text>
+        <text class='price-text' wx:if="{{item.price!=null}}">{{item.price}}元</text> <text class='price-text' wx:else="{{item.price!=null}}">10元</text>
+        <view class='distance'><i-icon type="coordinates_fill" /><text >距离: {{item.distance}}km</text></view>
+        <view  class='mark'><i-icon type="collection_fill" /><text  wx:if="{{item.mark==null}}">评分:  <text style="font-weight:bold">5.0</text></text>
+        <text  wx:else="{{item.mark!=null}}">评分:  <text style="font-weight:bold">{{item.mark}}</text></text></view>
+        
+      </view>
+
+      <view class='activity'>
+        <v-tag text='减' wx:if="{{item.activityType == 1}}" type='warning'></v-tag>
+        <v-tag text='奖' wx:if="{{item.activityType == 2}}" type='success'></v-tag>
+
+      </view>
+
+         <v-button type='default' size='small' v-class='button' wx-if="{{item.queue==null||item.queue==0}}">当前没人排队</v-button>
+      <v-button type='default' size='small' v-class='button' wx-if="{{item.queue!=0}}">{{item.queue}}名顾客在店里服务</v-button>
+
+
+      <view class='adress'>
+        <text class='cuIcon icon-adress'></text>
+        <text class='adress-text'>{{item.address}}</text>
+      </view>
+
+      <navigator url="../../pages/store-detail/index?id={{item.id}}&sid={{item.sid}}&picture={{item.profilePhoto}}&longitude={{item.longitude}}&latitude={{item.latitude}}&address={{item.address}}&storeName={{item.sysUserName}}&introduce={{item.introduce}}">
+      <v-button type="primary"  size='normal' v-class='position-button'>进去逛逛</v-button>
+      
+      </navigator>
+  </v-card>
+</block>

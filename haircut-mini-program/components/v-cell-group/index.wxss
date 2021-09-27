@@ -1,0 +1,7 @@
+.cell-group{
+  margin-top: 30rpx;
+}
+
+.cell-group>.cell:last-child::after{
+  border:none;
+}

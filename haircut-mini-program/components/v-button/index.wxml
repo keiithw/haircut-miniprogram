@@ -1,0 +1,33 @@
+
+
+<button 
+wx:if="{{size == 'small'}}" 
+class="button buttton-small bg-white v-class"
+style="border:1rpx solid {{color[type]}};color:{{color[type]}};" 
+bindtap='handleClick'>
+  <slot></slot>
+</button>
+
+<button 
+wx:if="{{size == 'normal'}}"
+class="button buttton-normal v-class {{type != 'default'?'text-white':''}}" 
+style="background:{{ color[type] }}" 
+bindtap='handleClick'>
+  <slot></slot>
+</button>
+
+<button 
+wx:if="{{disabled1==1}}"
+class="button buttton-normal v-class {{type != 'default'?'text-white':''}}" 
+style="background:{{ color[type] }}" 
+bindtap='handleClick' disabled="true">
+  <slot></slot>
+</button>
+
+<button 
+wx:if="{{size == 'large'}}"
+class="v-class" 
+style="background:{{ color[type] }}" 
+bindtap='handleClick'>
+  <slot></slot>
+</button>

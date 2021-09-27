@@ -1,0 +1,5 @@
+<view class='statistics'>
+  <view>
+    <text>{{score}}</text>
+  </view>
+</view>

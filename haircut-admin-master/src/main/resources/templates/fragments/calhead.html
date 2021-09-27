@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link rel="stylesheet"  href="/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="/assets/common.css" media="all">
+
+<body>
+
+<header th:fragment="header">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <a href="javascript:;" class="layui-hide-xs"><a href="/home" style="font-weight: bold;"><div class="layui-logo">后台管理系统</div></a>
+            </a>
+            <a href="javascript:;" class="layui-hide-xs">
+                <div class="switchMenu" style="display: none;"><i class="fa fa-indent"></i></div>
+            </a>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="/images/logo.jpg" class="layui-nav-img"></img>
+                        <shiro:principal property="sysUserName"></shiro:principal>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd id="updUsePwdDd" class="layui-this"><a href="javascript:;" onclick="updateUsePwd();">修改密码</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item" style="width: 78px;height: 46px; top: -4px; position: relative;">
+                            <div class="layui-input-block layui-layout-right">
+                                <input type="text" id="id" hidden>
+                                <input type="checkbox" id="switcher" name="zzz" lay-skin="switch" lay-filter="switchTest" lay-text="在线|离线">
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li class="layui-nav-item"><a href="/logout">退出</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                    <!--<li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;">系统管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/user/userManage">账号管理</a></dd>
+                            <dd><a href="/role/roleManage">角色管理</a></dd>
+                            <dd><a href="/permission/permissionManage">权限管理</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">基本设置</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/goodsCategory/goodsCategoryManage">服务类目管理 </a></dd>
+                            <dd><a href="/serviceType/serviceTypeManage">服务类型管理</a></dd>
+                            <dd><a href="/payplatform/payplatManage">支付方式</a></dd>
+                            <dd><a href="/bank/bankManage">银行管理</a></dd>
+                            <dd><a href="/position/positionManage">省市区管理</a></dd>
+                        </dl>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/head.js"></script>
+    <script>
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+    </script>
+    <!--<script src="/layui/layui.js" ></script>-->
+
+    <script src="/layui/layui.all.js"></script>
+
+    <script>
+        // 获取id
+        $().ready(function () {
+            $.ajax({
+                type: "GET",
+                data: '',
+                url: "/user/id",
+                success: function (data) {
+                    console.log('---');
+                    console.log(data);
+                    $('#id').val(data);
+                    checkMe(data);
+                    console.log("check执行完")
+                },
+
+                error: function () {
+                    layer.alert("操作请求错误，请您稍后再试",function(){
+                        layer.closeAll();
+                        //加载load方法
+                    });
+                }
+            });
+        });
+
+    </script>
+
+    <script>
+        function checkMe (data) {
+            var id = data;
+            console.log(id)
+            $.ajax({
+                type: "GET",
+                data: '',
+                url: "/user/isOnline?userId="+id,
+                success: function (data) {
+                    console.log("check访问成功")
+                    if (data===1) {
+
+                        $('#switcher').prop("checked",true)
+                        $('.layui-input-block').children(".layui-form-switch").addClass("layui-form-onswitch")
+                        $('.layui-input-block').children(".layui-form-onswitch").children("em").text("在线")
+                    }else {
+                        console.log("未上线")
+                    }
+                },
+                error: function () {
+                    layer.alert("redis未启动",function(){
+                        layer.closeAll();
+                        //加载load方法
+                        load(obj);//自定义
+                    });
+                }
+            });
+        }
+    </script>
+    <script>
+        //Demo
+        layui.use(['form'], function() {
+            var form = layui.form
+                , layer = layui.layer
+            //监听指定开关
+            form.on('switch(switchTest)', function (data) {
+                if (this.checked) {
+                    $.ajax({
+                        type: "GET",
+                        data: '',
+                        url: "/user/online?userId="+$('#id').val(),
+                        success: function (data) {
+                        },
+                        error: function () {
+                            layer.alert("操作请求错误，请您稍后再试",function(){
+                                layer.closeAll();
+                                //加载load方法
+                                load(obj);//自定义
+                            });
+                        }
+                    });
+
+                    layer.msg('上线状态' + (this.checked ? '上线' : '离线'), {
+                        offset: '6px'
+                    });
+                } else {
+                    $.ajax({
+                        type: "GET",
+                        data: '',
+                        url: "/user/offline?userId="+$('#id').val(),
+                        success: function (data) {
+                            layer.alert("已下线");
+                        },
+                        error: function () {
+                            layer.alert("操作请求错误，请您稍后再试",function(){
+                                layer.closeAll();
+                                //加载load方法
+                                load(obj);//自定义
+                            });
+                        }
+                    });
+                }
+                //do some ajax opeartiopns;
+            });
+        })
+
+    </script>
+</header>
+
+</body>
+</html>

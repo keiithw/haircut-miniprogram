@@ -1,0 +1,13 @@
+
+<block wx:if="{{type == 'text'}}">
+  <input type="text" class='v-input'></input>
+</block>
+
+<block wx:if="{{type == 'number'}}">
+  <input type="number" class='v-input'></input>
+</block>
+
+<block wx:if="{{type == 'textarea'}}">
+  <input type="number" autoHeigth='{{autoHeigth}}'></input>
+</block>
+

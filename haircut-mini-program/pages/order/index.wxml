@@ -1,0 +1,144 @@
+<view class='scrollPage'>
+  <v-tabs active='{{curActive}}' type="white" color='white' size='29rpx' v-class='tabs-class' background='linear-gradient(45deg, #9b5ff3, #8285fc)'  sticky>
+    <v-tab key='0' title='待消费' bindtap='waiting' v-class='tab-item'></v-tab>
+    <v-tab key='1' title='服务中' bindtap='serving' v-class='tab-item'></v-tab>
+    <v-tab key='2' title='已完成' bindtap='finish' v-class='tab-item'></v-tab>
+    <v-tab key='3' title='已取消/过号' bindtap='out' v-class='tab-item'></v-tab>
+  </v-tabs>
+
+<block wx:for="{{resArr}}" wx:if="{{curActive==0}}">
+  <v-card v-class='card-class' wx:if="{{item.status==-1}}">
+    <v-panel v-class='panel-class' type='success'>
+      <view class='text-white'>
+        <v-icon type='white' icon="icon-revoke"></v-icon>
+        <text class='revoke-text'>您前方还有{{item.number}}单</text>
+      </view>
+      <view class='line-up'> 
+        <text class='line-text'>预约号</text> 
+        <text class='text-white'>{{item.aid}}</text>
+      </view>
+    </v-panel>
+    <view class='bg-white'>
+      <v-cell-group v-class='cell-group-class' v-class='cell-group-class'>
+        <v-cell label='预约商家' value='{{item.storeName}}' align='between'></v-cell>
+        <v-cell label='服务师' value='{{item.barberName}}' align='between'></v-cell>
+        <v-cell label='联系电话' value='{{item.barberPhone}}' align='between'></v-cell>
+        <v-cell label='服务项目' value='{{item.serverName}}' align='between'></v-cell>
+        <v-cell label='合计' value='¥{{item.price}}' align='between'></v-cell>
+        <v-cell label='预约时间' value='{{item.day}}' align='between'></v-cell>
+      </v-cell-group>
+
+      <v-button type='button' bindtap="edit" size='normal' data-item="{{item}}" v-class='button-class-left'>改时间约</v-button>
+      <v-button type='button' bindtap="cancel" data-aid="{{item.aid}}" size='normal' v-class='button-class-right'>取消预约</v-button>
+    </view>
+  </v-card>
+  </block>
+  <block wx:for="{{resArr}}" wx:if="{{curActive==1}}">
+  <v-card v-class='card-class' wx:if="{{item.status==1}}">
+    <v-panel v-class='panel-class' type='success'>
+      <view class='text-white'>
+        <v-icon type='white' icon="icon-revoke"></v-icon>
+        <text class='revoke-text'>您前方还有{{item.number}}单</text>
+      </view>
+      <view class='line-up'> 
+        <text class='line-text'>预约单号</text> 
+        <text class='text-white'>{{item.aid}}</text>
+      </view>
+    </v-panel>
+    <view class='bg-white'>
+      <v-cell-group v-class='cell-group-class' v-class='cell-group-class'>
+        <v-cell label='预约商家' value='{{item.storeName}}' align='between'></v-cell>
+        <v-cell label='服务师' value='{{item.barberName}}' align='between'></v-cell>
+        <v-cell label='联系电话' value='{{item.barberPhone}}' align='between'></v-cell>
+        <v-cell label='服务项目' value='{{item.serverName}}' align='between'></v-cell>
+        <v-cell label='合计' value='¥{{item.price}}' align='between'></v-cell>
+        <v-cell label='预约时间' value='{{item.day}}' align='between'></v-cell>
+      </v-cell-group>
+      <v-button type='button' bindtap="pay" size='normal' data-item="{{item}}" v-class='button-class-right pay-button'>在线支付</v-button>
+      <i-action-sheet visible="{{ visible2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">确定支付吗？</view>
+        <text>服务:{{item.serverName}}，需支付{{item.price}}元</text>
+    </view>
+</i-action-sheet>
+
+<i-message id="message" />
+    </view>
+  </v-card>
+  </block>
+  
+  <block wx:for="{{resArr}}" wx:if="{{curActive==2}}">
+  <v-card v-class='card-class' wx:if="{{item.status==2}}">
+    <v-panel v-class='panel-class success-panel' type='success'>
+      <view class='text-white'>
+        <v-icon type='white' icon="icon-revoke"></v-icon>
+        <text class='revoke-text'>订单已完成 ! </text>
+      </view>
+      <view class='line-up'> 
+        <text class='line-text success-line'>预约号</text> 
+        <text class='text-white'>{{item.aid}}</text>
+      </view>
+    </v-panel>
+    <view class='bg-white'>
+      <v-cell-group v-class='cell-group-class' v-class='cell-group-class'>
+        <v-cell label='预约商家' value='{{item.storeName}}' align='between'></v-cell>
+        <v-cell label='服务师' value='{{item.barberName}}' align='between'></v-cell>
+        <v-cell label='联系电话' value='{{item.barberPhone}}' align='between'></v-cell>
+        <v-cell label='服务项目' value='{{item.serverName}}' align='between'></v-cell>
+        <v-cell label='合计' value='¥{{item.price}}' align='between'></v-cell>
+        <v-cell label='预约时间' value='{{item.day}}' align='between'></v-cell>
+      </v-cell-group>
+
+      <v-button type='button' bindtap="review" size='normal' data-item="{{item}}" v-class='button-class-left' wx-if="{{item.isReview==0}}">去评价</v-button>
+      <v-button type='button' bindtap="seeReview" size='normal' data-item="{{item}}" v-class='button-class-left' wx-if="{{item.isReview==1}}" >查看评价</v-button>
+      <v-button type='button' bindtap="redate" data-aid="{{item.aid}}" size='normal' v-class='button-class-right'>再次预约</v-button>
+    </view>
+  </v-card>
+  </block>
+  <block wx:for="{{resArr}}" wx:if="{{curActive==3}}">
+  <v-card v-class='card-class' wx:if="{{item.status==3}}">
+    <v-panel v-class='panel-class' type='success'>
+      <view class='text-white'>
+        <v-icon type='white' icon="icon-revoke"></v-icon>
+        <text class='revoke-text'>该预约已过期失效</text>
+      </view>
+      <view class='line-up'> 
+        <text class='line-text'>预约号</text> 
+        <text class='text-white'>{{item.aid}}</text>
+      </view>
+    </v-panel>
+    <view class='bg-white'>
+      <v-cell-group v-class='cell-group-class' v-class='cell-group-class'>
+        <v-cell label='预约商家' value='{{item.storeName}}' align='between'></v-cell>
+        <v-cell label='服务师' value='{{item.barberName}}' align='between'></v-cell>
+        <v-cell label='联系电话' value='{{item.barberPhone}}' align='between'></v-cell>
+        <v-cell label='服务项目' value='{{item.serverName}}' align='between'></v-cell>
+        <v-cell label='合计' value='¥{{item.price}}' align='between'></v-cell>
+        <v-cell label='预约时间' value='{{item.day}}' align='between'></v-cell>
+      </v-cell-group>
+
+     
+      <v-button type='button' bindtap="redate" data-aid="{{item.aid}}" size='normal' v-class='button-class-right'>重新预约</v-button>
+    </view>
+  </v-card>
+  </block>
+  <van-divider contentPosition="center">没有更多数据了..</van-divider>
+  <!-- 密码输入框 -->
+<view wx:if='{{showPayPwdInput}}'>
+    <view class='bg_layer'></view>
+    <view class='input_main'>
+        <view class='input_title'>
+            <view class='input_back' catchtap='hidePayLayer'><text></text></view>
+            <text>输入支付密码</text>
+        </view>
+        <view class='input_tip'><text>使用会员卡余额支付需要验证身份，验证通过后才可进行支付。</text></view>
+        <view class='input_row' catchtap='getFocus'>
+            <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                <text wx:if='{{pwdVal.length>i}}'></text>
+            </view>
+        </view>
+        <view class='forget_pwd' catchtap='hidePayLayer'>忘记密码</view>
+        <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6'/>
+    </view>
+</view>
+</view>

@@ -1,0 +1,37 @@
+<form bindsubmit="formSubmit" method="post">
+<view class='order'>
+<view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{openId}}" name="openId" title="openId" disabled/>
+    </view>
+    <view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{id}}" name="id" title="id" disabled/>
+    </view>
+    <view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{sex}}" title="性别" name="sex" disabled/>
+    </view>
+  <view class='row'>
+    <text class='title'>昵称</text>
+    <input value='{{nickName}}' class='input' placeholder="请输入姓名" />
+  </view>
+  <view class='row'>
+    <text class='title'>手机号</text>
+    <input class='input' name="phone" value="{{phone}}" placeholder="请输入手机号" />
+  </view>
+  <view class='row'>
+    <text class='title'>体重(kg)</text>
+   <input class='input' value="{{weight}}" maxlength="3" name="weight" type="number" title="体重(kg)" placeholder="请输入体重"/>
+  </view>
+   <view class='row'>
+    <text class='title'>身高(cm)</text>
+<input class='input'value="{{height}}" maxlength="5" name="height" type="number" title="身高(cm)" placeholder="请输入身高"/>
+  </view>
+   <view class='row'>
+    <text class='title'>自我介绍</text>
+<input class='input'value="{{introduce}}" maxlength="60" name="introduce" type="textarea" title="自我介绍" placeholder="说说你偏好的风格？或者你想聊聊什么？"/>
+  </view>
+
+</view>
+<view class='footer'>
+  <button form-type="submit" class='pay'>保存信息</button>
+</view>
+</form>

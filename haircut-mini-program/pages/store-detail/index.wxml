@@ -1,0 +1,91 @@
+<view>
+    <view class='store-info text-white relative'>
+       
+       <image id="picture" src='{{picture}}'></image>
+       <view id="content">
+            <view class='store-name'>{{storeName}}</view>
+          <view class='store-time'>工作日 10:30-22:30</view>
+          <view bindtap="openMap" class='store-address'><v-icon type='white' v-class='icon-calss' icon='icon-addressfill'></v-icon>{{address}}</view>
+          <view class='store-discount'>
+            <v-tag type='warning' v-class='tag-class' text='减'></v-tag>
+            <text>平台新用户首单满30减3</text>
+          <view wx:if="{{star==0}}"><i-icon type="collection" data-id="{{id}}" class="star" bindtap="star"/></view>
+           <view wx:elif="{{star==1}}"><i-icon type="collection_fill" data-id="{{id}}" class="star" bindtap="unstar" /></view>
+           <view></view>
+       </view>
+   
+      </view> 
+    </view>
+
+    
+
+<!--   <view class='store-info'> -->
+    <v-tabs active='{{curActive}}' v-class='tabs-class' gutter='50' sticky>
+    
+      <v-tab key='0' title='服务列表' bindtap='jumpTo' data-opt="item0"></v-tab>
+      
+            <v-tab key='1' title='服务评价' bindtap='jumpTo' data-opt="item1"></v-tab>
+    
+      <v-tab key='2' title='门店信息' bindtap='jumpTo' data-opt="item2"></v-tab>
+    </v-tabs>
+
+    <scroll-view class="jump_list" scroll-into-view="{{toView}}"   scroll-y="true" scroll-with-animation="true">
+    
+    <view id="item0" style="height:2px"></view>
+    <serve-list id="serveList" sid='{{sid}}' storeName='{{storeName}}' list='{{serveList}}'></serve-list>
+
+    <!-- 服务评价 -->
+   <view id="item1" style="height:2px"></view>
+    <v-card v-class='flex column align-center server-rate' titlePadding title='服务评价'>
+      <rate list="{{rateList}}"></rate>
+      <v-button type='default' size='small' bindtap="moreReview" v-class='detail-button'>更多评论</v-button>
+    </v-card>
+    <!-- 门店信息 -->
+    <view id="item2" style="height:2px"></view>
+    <v-card    v-class='flex column align-center store-msg' title='门店信息'>
+        <view  class='card-title'>本店简介</view>
+      <view><text class="content">{{introduce}}</text></view>
+        <view class='sub-title'>历史客流分布</view>
+        <view class='tip'>Tony提醒您：参考图示,了解Tony排队高峰时段,可提前规划您的剪发时间哦！</view>
+
+        <view class='card-title'>服务标准</view>
+
+        <v-grid col='2' border='{{false}}' col-gutter='95'  row-gutter='30' v-class='gird-class'>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg1'></view>
+            <text class='content'>专注剪发服务</text>
+          </v-grid-item>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg2'></view>
+            <text class='content'>进口吸碎发系统</text>
+          </v-grid-item>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg3'></view>
+            <text class='content'>头皮清洁喷雾</text>
+          </v-grid-item>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg4'></view>
+            <text class='content'>无推销办卡</text>
+          </v-grid-item>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg5'></view>
+            <text class='content'>工具严格消毒</text>
+          </v-grid-item>
+          <v-grid-item  v-class='item-class'>
+            <view class='img-box bg6'></view>
+            <text class='content'>三年以上经验</text>
+          </v-grid-item>
+        </v-grid>
+
+        <view class='solid-top server'>
+          <view bindtap="handleOpen" class='server-info'>
+            <text class='server-text'>客服小V(工作日10:00-18:00)</text>
+            <v-icon icon='icon-up' size='28'  wx:if="{{isOpen}}"></v-icon>
+            <v-icon icon='icon-down'  size='28' wx:else></v-icon>
+          </view>
+          <view class="code {{isOpen?'show':''}}"></view>
+        </view>
+    </v-card>
+  <!-- </view> -->
+ </scroll-view>
+</view>

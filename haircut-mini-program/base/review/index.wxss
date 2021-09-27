@@ -1,0 +1,57 @@
+.rate{
+  padding:50rpx 32rpx 32rpx;
+  display: flex;
+}
+
+.avatar{
+  margin-right: 25rpx;
+}
+
+.right{
+  flex-grow: 1;
+}
+
+#img{
+  border-radius: 26rpx; margin-top:19rpx;
+}
+
+.user-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30rpx;
+}
+
+
+.rate-class{
+  justify-content: flex-end;
+}
+
+
+.phone{
+  color:#999999;
+}
+
+.content {
+font-size: 37rpx;
+  margin-bottom: -8rpx;
+
+}
+
+.label-class{
+  margin-right: 12rpx;
+}
+
+.label-content{
+  font-size: 26rpx;
+  color:#999999;
+  line-height: 40rpx;
+}
+
+.last {
+  padding-top: 35rpx;
+  color:#999999;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: space-between;
+}

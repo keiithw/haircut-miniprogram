@@ -1,0 +1,7 @@
+<!--pages/review-list/index.wxml-->
+<view class="title">
+{{itemName}}的评价
+</view>
+
+<review  list="{{rateList}}"></review>
+<i-divider content="下面已经没有更多数据啦!~"></i-divider>
