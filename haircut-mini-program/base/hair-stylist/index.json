@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-card": "/components/v-card/index",
+    "v-button": "/components/v-button/index",
+    "v-price": "/components/v-price/index",
+    "v-avatar": "/components/v-avatar/index",
+    "v-icon": "/components/v-icon/index",
+    "v-modal": "/components/v-modal/index",
+    "v-tip": "/components/v-tip/index"
+  }
+}

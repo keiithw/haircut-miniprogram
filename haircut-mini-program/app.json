@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/stylist-detail/index",
+    "pages/my/index",
+    "pages/store-detail/index",
+    "pages/order/index",
+    "pages/full-map/index",
+    "pages/review-list/index",
+    "pages/auth/index",
+    "pages/my-edit/index",
+    "pages/stylists/index",
+    "pages/demo/demo",
+    "pages/calendar/calendar",
+    "pages/pay/index",
+    "pages/store-map/index",
+    "pages/review-create/index",
+    "base/review/index"
+  ],
+  "window": {
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3f51b5",
+    "navigationBarTitleText": "Tony造型",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#fffff"
+  },
+  "usingComponents": {
+    "cal": "/components/calendar/index",
+    "i-message": "pages/dist/message/index",
+    "i-avatar": "pages/dist/avatar/index",
+    "i-button": "pages/dist/button/index",
+    "i-icon": "pages/dist/icon/index",
+    "i-swipeout": "pages/dist/swipeout/index",
+    "i-action-sheet": "pages/dist/action-sheet/index",
+    "i-toast": "pages/dist/toast/index",
+    "i-cell": "pages/dist/cell/index",
+    "i-cell-group": "pages/dist/cell-group/index"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#8f74fa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "/common/images/cut.png",
+        "selectedIconPath": "/common/images/cut_active.png"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "订单",
+        "iconPath": "/common/images/order.png",
+        "selectedIconPath": "/common/images/order_active.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/common/images/user.png",
+        "selectedIconPath": "/common/images/user_active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

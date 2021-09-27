@@ -1,0 +1,37 @@
+<block wx:for="{{list}}" wx:key>
+    <v-card>
+    <view class='rate'>
+      <v-avatar size='60' src='{{item.customerAvatar}}' v-class='avatar'></v-avatar>
+
+      <view class='right'>
+        <view class='user-info'>
+          <text class='name' style="font-weight:560;font-size: 32rpx;">{{item.customerName}}<text>评价{{item.serveName}}：</text></text>
+          <v-rate value='{{item.stars}}' v-class='rate-class'></v-rate>
+        </view>
+        <view class='content'><span class="quote" style="top: -10rpx;left: -10rpx;font-weight: 1000;font-size: 21px!important;position: relative;">“</span>{{item.title}}<span class="quote" style="top: -10rpx;left: 10rpx;font-weight: 1000;font-size: 21px!important;position: relative;">”</span></view>
+
+        <view>
+          <v-icon icon='icon-label' v-class='label-class' size='88'></v-icon>
+          <text class='label-content'>{{item.content}}</text>
+        </view>
+        
+  <view id="img" bindtap="zoom" data-url="{{item.photo}}" style="border-radius: 26rpx; margin-top:19rpx">
+            <v-icon icon='icon-label' v-class='label-class' size='88'></v-icon>
+            <van-image width="92"
+            height="92"
+            fit="cover"
+            src="{{item.photo}}"
+            radius="14">
+            
+          </van-image>
+        </view>
+
+        <view class='last'>
+          <text>服务者：{{item.barberName}}</text>
+          <text>{{item.createdTime}}</text>
+        </view>
+      </view>
+  
+    </view>
+     </v-card>
+</block>

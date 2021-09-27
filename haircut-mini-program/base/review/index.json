@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-avatar": "/components/v-avatar/index",
+    "v-icon": "/components/v-icon/index",
+    "v-rate": "/components/v-rate/index",
+    "v-card": "/components/v-card/index",
+      "van-image": "/pages/vant/image/index"
+  }
+}

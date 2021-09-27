@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='管理'"></head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body layui-anim layui-anim-upbit" data-anim="layui-anim-upbit"  style="margin: 1%">
+        <table id="commonList" lay-filter="commonTable"></table>
+
+        <button class="layui-btn layui-btn-normal" onclick="add()">新增</button>
+
+        <script type="text/html" id="optBar">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
+
+    </div>
+
+    <!--添加或编辑-->
+    <div id="setData" class="layer_self_wrap" style="width:500px;display:none;">
+        <form id="commonForm" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+            <input id="pageNum" type="hidden" name="pageNum"/>
+            <input id="fuckId" type="hidden" name="id"/>
+            <input type="hidden" id="sid" name="sid" th:value="${sid}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">服务名</label>
+                <div class="layui-input-inline">
+                    <input id="name" name="name" lay-verify="required" autocomplete="off" class="layui-input" type="text"/>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片</label>
+                <div class="layui-input-inline">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="showimage">选择文件</button>
+                    </div>
+                    <img src="" id="picture" width="94">
+                    <input id="path" class="layui-form-mid" name="picture" autocomplete="off" type="hidden"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">原价</label>
+                <div class="layui-input-inline">
+                    <input id="originalPrice" name="originalPrice" lay-verify="required" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">现价</label>
+                <div class="layui-input-inline">
+                    <input id="currentPrice" name="currentPrice" lay-verify="required"  autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">描述</label>
+                <div class="layui-input-inline">
+                    <input id="description" name="description" autocomplete="off" class="layui-input" type="text"/>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: 10px;">
+                    <button class="layui-btn"  lay-submit="" lay-filter="submit">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script type="text/javascript"  th:inline="none">
+
+            layui.use('table', function(){
+                var table = layui.table;
+                form = layui.form;
+                let sid = $('#sid').val();
+                tableIns=table.render({
+                    id:'id',
+                    elem: '#commonList',
+                    url:'/serve/list?sid='+sid,
+                    method: 'get', //默认：get请求
+                    cellMinWidth: 80,
+                    page: true,
+                    request: {
+                        pageName: 'pageNum', //页码的参数名称，默认：pageNum
+                        limitName: 'pageSize' ,//每页数据量的参数名，默认：pageSize
+                    },
+                    response:{
+                        statusName: 'code', //数据状态的字段名称，默认：code
+                        statusCode: 200, //成功的状态码，默认：0
+                        countName: 'totals', //数据总数的字段名称，默认：count
+                        dataName: 'list' //数据列表的字段名称，默认：data
+                    },
+                    cols: [
+                        [
+                        {type:'numbers'/*,width:"5%"*/}
+                        ,{field:'id', title:'id'}
+                        ,{field:'name', title:'服务名'}
+                        ,{field:'originalPrice', title:'原价',align:'center'/*,width:"10%"*/}
+                        ,{field:'currentPrice', title:'现价',align:'center'/*,width:"10%"*/}
+                        ,{field:'description', title:'描述',align:'center'/*,width:"10%"*/}
+                        ,{fixed:'right',title:'操作',align:'center', toolbar:'#optBar'/*,width:"25%"*/}
+                    ]
+                    ],
+
+                });
+
+                layui.use('upload', function(){
+                    let upload = layui.upload;
+                    //执行实例
+                    let uploadInst = upload.render({
+                        elem: '#showimage' //绑定元素
+                        ,url: 'http://localhost:8102/user/uploadPhoto' //上传接口
+                        ,done: function(res){
+                            //上传完毕回调
+                            console.log("ok")
+                            layer.alert("上传成功")
+                            $('#path').val(res.path)
+                            $('#picture').attr('src',res.path)
+                            console.log($('#path').val())
+                            //res.data 是个map path : "asdq4wadd";
+                        }
+                        ,error: function(){
+                            //请求异常回调
+                        }
+                    });
+                });
+
+
+                //监听工具条
+                table.on('tool(commonTable)', function(obj){
+                    var data = obj.data;
+                    if(obj.event === 'del'){
+                        //删除
+                        del(data,data.id);
+                    } else if(obj.event === 'edit'){
+                        //编辑
+                        open(data,"编辑");
+                    }
+                });
+
+                //监听提交
+                form.on('submit(submit)', function(data){
+                    formSubmit(data);
+                    return false;
+                });
+
+            });
+            //提交表单
+            function formSubmit(obj){
+                $.ajax({
+                    type: "POST",
+                    data : $('#commonForm').serialize(),
+                    url: "/serve/insetOrUpdate",
+                    success: function (data) {
+                        if (data.code === 200) {
+                            layer.alert(data.msg,function(){
+                                layer.closeAll();
+                                load(obj);
+                            });
+                        } else {
+                            layer.alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        layer.alert("操作请求错误，请您稍后再试",function(){
+                            layer.closeAll();
+                            //加载load方法
+                            load(obj);//自定义
+                        });
+                    }
+                });
+            }
+            var pageCurr;
+            //开通用户
+            function add(){
+                open(null,"创建服务");
+            }
+            function open(data,title){
+                if(data==null || data==""){
+                    $("#fuckId").val("");
+                }else{
+                    $("#fuckId").val(data.id);
+                    $("#name").val(data.name);
+                    $("#originalPrice").val(data.originalPrice);
+                    $("#currentPrice").val(data.currentPrice);
+
+                }
+                var pageNum = $(".layui-laypage-skip").find("input").val();
+                $("#pageNum").val(pageNum);
+                // $.ajax({
+                //     url:'/role/getRoles',
+                //     dataType:'json',
+                //     async: true,
+                //     success:function(data){
+                //         $.each(data,function(index,item){
+                //             if(!roleId){
+                //                 var option = new Option(item.roleName,item.id);
+                //             }else {
+                //                 var option = new Option(item.roleName,item.id);
+                //                 // // 如果是之前的parentId则设置选中
+                //                 if(item.id == roleId) {
+                //                     option.setAttribute("selected",'true');
+                //                 }
+                //             }
+                //             $('#roleId').append(option);//往下拉菜单里添加元素
+                //             form.render('select'); //这个很重要
+                //         })
+                //     }
+                // });
+
+                layer.open({
+                    type:1,
+                    title: title,
+                    fixed:false,
+                    resize :false,
+                    shadeClose: true,
+                    area: ['550px'],
+                    content:$('#setData'),
+                    end:function(){
+                        clean();
+                    }
+                });
+            }
+
+            function del(obj,id,name) {
+                if(null!=id){
+                    layer.confirm('您确定要删除'+name+'用户吗？', {
+                        btn: ['确认','返回'] //按钮
+                    }, function(){
+                        $.post("/serve/delete",{"id":id},function(data){
+                            if (data.code === 200) {
+                                layer.alert(data.msg,function(){
+                                    layer.closeAll();
+                                    load(obj);
+                                });
+                            } else {
+                                layer.alert(data.msg);
+                            }
+                        });
+                    }, function(){
+                        layer.closeAll();
+                    });
+                }
+
+            }
+
+
+            function load(obj){
+                //重新加载table
+                tableIns.reload({
+                    where: obj.field
+                    , page: {
+                        curr: pageCurr //从当前页码开始
+                    }
+                });
+            }
+
+            function clean(){
+                $("#username").val("");
+                $("#name").val("");
+                $("#description").val("");
+                $('#originalPrice').val("");
+                $('#currentPrice').val("");
+            }
+
+
+    </script>
+    <script>
+
+    </script>
+</div>
+</body>
+</html>

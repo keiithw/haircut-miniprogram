@@ -1,0 +1,82 @@
+.store-list{
+  padding: 60rpx 32rpx 40rpx;
+  position: relative;
+}
+
+.store-title{
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+v-button .position-button{
+  top: 355rpx!important
+}
+.store-title text {
+  font-size: 50rpx;
+  margin-bottom: 131rpx;
+}
+.storeName i-icon{
+  margin-bottom: 15rpx
+}
+.storeName{
+   margin-bottom: 131rpx;
+}
+
+.price{
+  padding-top:-10rpx;
+  position: relative;
+  top: 45rpx;
+
+}
+
+
+.distance{
+   position: absolute;
+  right:8rpx;
+ top: -33rpx;
+font-size: 30rpx;
+
+}
+.mark{
+   position: absolute;
+  right: 12rpx;
+  top: -156rpx;
+font-size: 20px;
+
+}
+.price-text{
+  padding-left: 13rpx;
+}
+
+.activity{
+  padding-top: 35rpx;
+}
+
+.activity-content{
+  font-size: 22rpx;
+  color:#898989;
+  padding-left: 10rpx;
+}
+
+.button{
+  margin-top: 33rpx;
+}
+
+.adress {
+  padding-top: 24rpx;
+}
+
+.adress-text{
+  padding-left: 15rpx;
+  color:#666;
+  font-size: 22rpx;
+}
+
+.position-button{
+  position: absolute;
+  right: 32rpx;
+  top:230rpx;
+}

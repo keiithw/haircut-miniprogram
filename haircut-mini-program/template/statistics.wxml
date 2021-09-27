@@ -1,0 +1,12 @@
+<template name='statistics'>
+  <view class='flex justify-around align-center relative statistics'>
+    <view class='flex column align-center'>
+      <view class='font-lg'>{{rate}}</view>
+      <text class='p-t-15 font-xs text-gray'>评分</text>
+    </view>
+    <view class='flex column align-center'>
+      <view class='font-lg'>{{num}}</view>
+      <text class='p-t-15 font-xs text-gray'>评论数</text>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,24 @@
+<view class="v-class v-rate" 
+    bindtouchmove="handleTouchMove">
+    <input type="text" :name="name" wx:value="{{value}}" class="v-rate-hide-input" />
+    <view
+        wx:for="{{count}}"
+        wx:key="{{item}}" 
+        class="v-rate-star {{ parse.getCurrent( value,index ) }}"
+        data-index="{{index}}"
+        bindtap="handleClick">
+        <v-icon icon="icon-like" size="{{size}}" type='error' wx:if="{{index < value}}"></v-icon>
+        <v-icon icon="icon-like" size="{{size}}" type='info' wx:else></v-icon>
+    </view>
+    <view class="v-rate-text" wx:if="{{ value !== 0 }}"><slot></slot></view>
+</view>
+<!-- <wxs module="parse">
+var prefixCls = 'v-rate';
+module.exports = {
+    getCurrent : function( value,index ){
+        if( index < value  ){
+            return prefixCls + '-current'
+        }
+    }
+}
+</wxs> -->

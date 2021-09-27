@@ -1,0 +1,3 @@
+<view class='avatar v-class' style="width:{{size}}rpx;height:{{size}}rpx;{{type=='circle'?'border-radius:100%;':'border-radius:20%;'}}">
+  <image src='{{src}}' mode='aspectFill'></image>
+</view>

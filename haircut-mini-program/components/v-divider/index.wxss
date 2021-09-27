@@ -1,0 +1,38 @@
+.v-divider{
+  color:white;
+  display: flex;
+  align-items: center;
+}
+
+.v-divider-before,.v-divider-after{
+  height: 1px;
+  background: rgba(255, 255, 255, .2);
+  flex-grow: 1;
+}
+
+.v-divider-text{
+  padding:0 15rpx;
+}
+
+/* .v-divider::before{
+  content: ' ';
+  display: block;
+  height:1rpx;
+  background: rgba(255, 255, 255, .2);
+  position: absolute;
+  top:50%;
+  left: 0;
+  width:35%;
+}
+
+.v-divider::after{
+  content: ' ';
+  display: block;
+  height:1rpx;
+  background: rgba(255, 255, 255, .2);
+  position: absolute;
+  top:50%;
+  right: 0;
+  width:35%;
+} */
+

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-grid-icon": "../v-grid-icon/index",
+    "v-badge": "../v-badge/index"
+  }
+}

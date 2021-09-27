@@ -1,0 +1,3 @@
+<view class='v-class v-panel' style="background:{{color[type]}}">
+  <slot></slot>
+</view>

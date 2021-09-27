@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "v-avatar": "/components/v-avatar/index",
+    "v-modal": "/components/v-modal/index",
+    "v-grid": "/components/v-grid/index",
+    "v-icon": "/components/v-icon/index",
+    "v-grid-item": "/components/v-grid-item/index",
+    "v-grid-icon": "/components/v-grid-icon/index"
+  }
+}

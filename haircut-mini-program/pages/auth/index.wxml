@@ -1,0 +1,24 @@
+<!--pages/auth/index.wxml-->
+
+
+  <view class='headView'>
+
+    <view class='headImageView'>
+
+      <image class='headImage' src='../../common/images/store.gif' mode='scaleToFill'></image>
+
+    </view>
+
+    <view class='titleText'>登录才可获得完整服务</view>
+
+    <view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
+
+<i-button bindtap="authClick" bind:click="" type="success" open-type="getUserInfo" >一键登录</i-button>
+
+  </view>
+
+
+<i-toast id="toast" />
+<!-- 需要使用 button 来授权登录 -->
+  <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  <view wx:else>请升级微信版本</view> -->

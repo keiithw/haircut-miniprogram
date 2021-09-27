@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-map":"/components/v-map/index"
+  }
+}

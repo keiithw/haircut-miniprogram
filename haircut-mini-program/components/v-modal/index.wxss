@@ -1,0 +1,128 @@
+.v-modal{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1110;
+  opacity: 0;
+  outline: 0;
+  text-align: center;
+  transform: scale(1);
+  backface-visibility: hidden;
+  perspective: 2000rpx;
+  background: rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out 0s;
+  pointer-events: none;
+}
+
+.v-modal.show {
+  opacity: 1;
+  transition-duration: 0.3s;
+  transform: scale(1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.v-dialog {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  width: 680rpx;
+  max-width: 100%;
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.v-dialog.show{
+  transform: scale(1);
+}
+
+
+.v-modal::before {
+  content: "\200B";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.v-modal__title {
+  min-height: 100rpx;
+  line-height: 100rpx;
+  position: relative;
+  font-size: 32rpx;
+}
+
+.v-modal__title::after{
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-bottom:1px solid rgba(0, 0, 0, .1);
+}
+
+
+.v-modal__content {
+  padding:50rpx;
+  
+}
+
+.v-modal__bar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  min-height: 100rpx;
+  justify-content: space-between;
+}
+
+.bar-button {
+  flex:1;
+  text-align: center;
+  line-height: 100rpx;
+}
+
+
+.bar-button__cancel {
+  position: relative;
+}
+
+.bar-button__cancel::before{
+  content: " ";
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-top:1rpx solid rgba(0, 0, 0, .1);
+}
+
+.bar-button__sure {
+  /* background: linear-gradient(45deg, #9171fa, #8286fc); */
+  color:white;
+}

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-cascade": "/components/v-cascade/index",
+    "v-icon": "/components/v-icon/index"
+  }
+}

@@ -1,0 +1,22 @@
+.con{
+    font-size: 28px;
+    position: relative;
+    top: -16px;
+    float: right;
+}
+.calContainer{
+   background-color: white;
+  border-radius: 0 0 48rpx 48rpx;
+  margin: 0 4px;
+}
+
+.selection{
+  margin-left:9prx;
+  margin-right: 9rpx
+}
+#sel1{
+  margin-top: 21rpx;
+}
+#btnPlace{
+  margin-top: 58rpx;
+}

@@ -1,0 +1,17 @@
+<view class="v-modal {{show?'show':''}}">
+    <view class="v-dialog {{show?'show':''}}">
+      <view class="v-modal__title">
+        <view class="content">{{title}}</view>
+        <view class="action" bindtap="hideModal">
+          <text class="icon-close text-red"></text>
+        </view>
+      </view>
+      <view class="v-modal__content">
+        <slot></slot>
+      </view>
+      <view class="v-modal__bar">
+        <view class="bar-button bar-button__cancel" catchtap="hideModal">取消</view>
+        <view class="bar-button bar-button__sure" style="background:{{type == 'button'?color.button:''}}" catchtap="confirm">确定</view>
+      </view>
+    </view>
+</view>

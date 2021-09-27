@@ -1,0 +1,3 @@
+<text class='v-tip v-class' style="color:{{type == 'error'?color.error:color.explain}}">
+  <slot></slot>
+</text>

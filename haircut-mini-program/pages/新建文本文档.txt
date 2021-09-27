@@ -1,0 +1,22 @@
+<form bindsubmit="formSubmit" method="post">
+<i-panel title="个人信息编辑">
+    <text id="safeText"> 数据仅为您提供更好的定制服务，店铺已保证您的隐私安全!</text>
+    <view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{openId}}" name="openId" title="openId" disabled/>
+    </view>
+    <view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{id}}" name="id" title="id" disabled/>
+    </view>
+    <view hidden="true" hover-class="none" hover-stop-propagation="false">
+        <i-input value="{{sex}}" title="性别" name="sex" disabled/>
+    </view>
+    <input value="{{nickName}}" name="nickName" title="昵称" disabled/>
+    <input value="{{phone}}" maxlength="11" name="phone" type="number" title="联系电话" placeholder="请输入手机号" />
+    <input value="{{height}}" maxlength="5" name="height" type="number" title="身高(cm)" placeholder="请输入身高"/>
+    <input value="{{weight}}" maxlength="3" name="weight" type="number" title="体重(kg)" placeholder="请输入体重"/>
+     <input value="{{introduce}}" maxlength="60" name="introduce" type="textarea" title="自我介绍" placeholder="如: 我是朋克风格, 热爱多彩的头发"/>
+</i-panel>
+<button id="myBTN" type="primary" formType="submit">保存信息</button>
+</form>
+
+

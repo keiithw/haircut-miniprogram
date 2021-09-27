@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "v-card": "/components/v-card/index",
+    "v-button": "/components/v-button/index",
+    "v-map": "/components/v-map/index",
+    "v-search": "/components/v-search/index",
+    "v-swiper": "/components/v-swiper/index",
+    "store-list": "/base/store-list/index",
+    "i-toast": "../dist/toast/index"
+  }
+}

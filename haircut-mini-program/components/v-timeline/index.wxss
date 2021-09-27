@@ -1,0 +1,67 @@
+.v-timeline {
+  display: block;
+  background-color: #fff;
+}
+
+.v-timeline .item {
+  padding: 36rpx 30rpx 30rpx 120rpx;
+  position: relative;
+  display: block;
+  z-index: 0;
+}
+
+.v-timeline>.item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1rpx;
+  background-color: #ddd;
+  left: 60rpx;
+  height: 100%;
+  top: 0;
+  z-index: 8;
+}
+
+
+.v-timeline>.item::before {
+  font-family: "cuIcon";
+  display: block;
+  position: absolute;
+  top: 36rpx;
+  z-index: 9;
+  background-color: #fff;
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  border: none;
+  line-height: 50rpx;
+  left: 36rpx;
+}
+
+.v-timeline>.item:not([class*="icon-"])::before {
+  content: "\e763";
+}
+
+.v-timeline>.item[class*="icon"]::before {
+  background-color: #fff;
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  border: none;
+  line-height: 50rpx;
+  left: 36rpx;
+}
+
+.v-timeline>.item>.content {
+  padding:0 0 15rpx;
+  border-radius: 6rpx;
+  display: block;
+  line-height: 1.6;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.v-timeline>.item>.desc {
+  color:#898989;
+  font-size: 25rpx;
+}

@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "v-tabs": "/components/v-tabs/index",
+    "v-tab": "/components/v-tab/index",
+    "v-card": "/components/v-card/index",
+    "v-panel": "/components/v-panel/index",
+    "v-cell-group": "/components/v-cell-group/index",
+    "v-cell": "/components/v-cell/index",
+    "v-icon": "/components/v-icon/index",
+    "v-button": "/components/v-button/index",
+     "van-divider": "/pages/vant/divider/index"
+  }
+}

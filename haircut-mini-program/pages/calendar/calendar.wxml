@@ -1,0 +1,62 @@
+<view class="scrollPage">
+<view class="calContainer">
+<cal bindOnDayClick="onDayClick" dotDays="{{dots}}" mode="normal" dotDays="{{dotDays}}" dotColor="{{dotColor}}" showMoreDays="false" bindOnMonthChange="bindOnMonthChange"/>
+</view>
+<form bindsubmit="submitAppointment" bindsubmit="formSubmit">
+<view class="section" id="sel1">
+  <view class="section__title"></view>
+  
+    <view class="picker">
+     <i-input value="{{day}}" name="day" title="当前选择日期" autofocus disabled="true" />
+    </view>
+
+</view>
+
+<view class="section" id="sel2">
+  <view class="section__title"></view>
+ 
+    <view class="picker">
+      <i-input value="{{time}}" title="当前选择时间" autofocus disabled="true"/>
+    </view>
+ 
+</view>
+
+<view style="margin-top: 17rpx;text-align:center">
+      <text style="font-size: 12px;color: #283;font-weight: bold;">{{tip}}</text>
+    </view>
+
+<view style="margin-left:9rpx;margin-right:9rpx;margin-top: 13px;text-align: center;margin-bottom: 8px;font-size: 17px;">预约时间</view>
+<i-cell-group i-class="cellGroup" style="margin-top: 8rpx" wx:for="{{noonList}}" wx:for-item="item">
+ <picker mode="time" bindtap="clearTime" value="{{time}}" start="{{item.start}}" data-max="{{item.intervalMax}}" end="{{item.end}}" bindchange="bindTimeChange">
+    <i-cell i-class="cell" title="{{item.noonName}}" label="上班时间:{{item.start}} - {{item.end}}"><i-icon i-class="con" type="enterinto" /></i-cell>
+     </picker>
+</i-cell-group>
+<i-panel title="备注说明">
+  <input name="aid" value="{{aid}}" hidden="true"/>
+    <input name="sid" value="{{sid}}" hidden="true"/>
+    <input name="storeName" value="{{storeName}}" hidden="true"/>
+    <input name="serverId" value="{{serveId}}"  hidden="true"/>
+    <input name="serverName"  value="{{serveName}}" hidden="true"/>
+    <input name="noon"  value="{{noon}}" hidden="true"/>
+    <input name="name" value="{{name}}"  hidden="true"/>
+    <input name="price"  value="{{price}}" hidden="true"/>
+  <input name="barberId" value="{{barberId}}"  hidden="true"/>
+  <input name="barberName" value="{{barberName}}"  hidden="true"/>
+  <input name="customerId" value="{{customerId}}"  hidden="true"/>
+  <input name="customerName" value="{{customerName}}"  hidden="true"/>
+  <input name="customerAvatar" value="{{customerAvatar}}"  hidden="true"/>
+   <input name="barberAvatar" value="{{barberAvatar}}"  hidden="true"/>
+  <input name="barberPhone" value="{{barberPhone}}"  hidden="true"/>
+  <input name="customerPhone" value="{{customerPhone}}"  hidden="true"/>
+  <i-input name="note" value="{{note}}"  placeholder="写写你的需求" maxlength="80"/>
+  </i-panel>
+  <view id="btnPlace"> 
+    <button type="primary" id="submit" form-type="submit">提交预约</button>
+  </view>
+  <i-message id="message" />
+</form>
+
+ 
+
+
+</view>

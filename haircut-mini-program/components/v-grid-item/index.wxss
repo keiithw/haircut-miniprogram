@@ -1,0 +1,10 @@
+.v-grid-item{
+  text-align: center;
+  position: relative;
+}
+
+.badge-class{
+  position: absolute;
+  top:50rpx;
+  left: 125rpx;
+}

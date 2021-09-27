@@ -1,0 +1,6 @@
+<view class='tag v-class'  style="background:{{color[type]}}">
+  {{text}}
+</view>
+
+
+

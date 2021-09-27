@@ -1,0 +1,70 @@
+/* pages/review-create/index.wxss */
+Page{
+  background: white
+}
+.custom-class.van-cell .van-cell__title{
+  font-size: 65rpx
+}
+.custom-class .van-cell__label{
+  margin-top: var(--cell-label-margin-top,15px);
+}
+
+.van-panel .van-cell__title{
+ font-size: 35rpx;
+ font-weight: 560
+}
+.custom-class .van-panel{
+ margin-top: 54rpx;
+}
+.custom-class  .van-panel__contentvan-panel{
+ margin-top: 44rpx;
+}
+.container{
+  height: 100%;
+}
+
+#starRow{
+  font-size: 35rpx;
+ font-weight: 560
+}
+#titleRow{
+  height: 43rpx;
+}
+#titleRow .van-col--3{
+     font-size: 35rpx;
+ font-weight: 560;
+ margin-top: 15rpx;
+
+}
+#stupidCell{
+  margin-top: 31rpx;
+
+}
+#reviewBox{
+  margin-top: 28rpx;
+}
+#pictureBox{
+  margin-left: 28rpx;
+margin-top: 20rpx;
+}
+.upload{
+  margin-top: 16rpx;
+  margin-left: 114rpx;
+
+}
+.picture-text{
+   font-size: 35rpx;
+ font-weight: 560
+}
+.field-index--van-field{
+  height: 210rpx;
+}
+.buttonBox{
+  text-align: center;
+  margin-top: 115rpx
+}
+.submitBtn{
+  background: #2196f3!important;
+width: 67%;
+border-radius: 34rpx;
+}

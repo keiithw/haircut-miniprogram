@@ -1,0 +1,33 @@
+<block wx:for="{{list}}" wx:key="id" wx-item>
+
+  <v-card v-class='stylist'>
+    <!-- 头像 -->
+    
+  <i-avatar bindtap="zoom" data-url="{{item.picture}}" src='{{item.picture}}' shape='square' size='large' i-class="avatar" ></i-avatar>
+    <!-- 基本信息 -->
+    <view class='stylist-msg'>
+      <view class='stylist-name'>{{item.name}}</view>
+      <view class='stylist-price'>
+        <v-price price="{{item.currentPrice}}" format='1' v-class='price-left' type='error'></v-price>
+        <v-price price="{{item.originalPrice}}" format='0' type='info'></v-price>
+        <v-icon icon='icon-question' v-class='question' catchtap='showQuestion'></v-icon>
+      
+      </view>
+
+      <!-- 多少人正在剪发 -->
+      <!-- <view class='cutting-list'>
+        <block wx:for="{{item.cutting}}">
+          <v-icon icon='icon-moon' color='#333'></v-icon>
+        </block>
+      </view> -->
+    </view>
+
+    <v-button type='primary' size='normal' v-class='take-button' data-serveId='{{item.id}}' data-price="{{item.currentPrice}}" data-sid="{{sid}}" data-name="{{item.name}}" data-storeName="{{storeName}}" bindtap='handleModal'>pick设计师</v-button>
+
+  </v-card>
+</block>
+
+
+
+
+

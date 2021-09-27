@@ -1,0 +1,10 @@
+.tag{
+  display: inline-block;
+  padding:0 6rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 22rpx;
+  color:white;
+  border-radius: 5rpx;
+  text-align: center;
+}

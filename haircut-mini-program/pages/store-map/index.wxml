@@ -1,0 +1,2 @@
+<!--pages/store-map/index.wxml-->
+<v-map markers="{{markers}}"></v-map>

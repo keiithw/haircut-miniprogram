@@ -1,0 +1,10 @@
+.v-grid-icon{
+  display:block;
+  padding: 65rpx 0 28rpx;
+  text-align: center;
+  width: 100%;
+}
+.v-grid-icon image{
+  width:100%;
+  height:100%;
+}

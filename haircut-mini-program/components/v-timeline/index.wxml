@@ -1,0 +1,8 @@
+
+
+<view class='timeline'>
+    <view class='item v-class' wx:for="{{list}}" wx:key>
+      <text class='content'>{{item.content}}</text>
+      <text class='desc'>{{item.desc}}</text>
+    </view>
+</view>

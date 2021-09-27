@@ -1,0 +1,9 @@
+/* pages/review-list/index.wxss */
+.title{
+
+margin-top: 104rpx;
+font-size: 60rpx;
+margin-bottom: 99rpx!important;
+text-align: center;
+
+}

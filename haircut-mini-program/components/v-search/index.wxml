@@ -1,0 +1,6 @@
+<cover-view class='search' bindtap='handleClick'>
+    <cover-image src='../../common/images/address.png' class='address-image'></cover-image>
+    <cover-view class='search-city'>{{city}}</cover-view>
+</cover-view>
+
+<!-- <v-cascade wx:if="{{showCascade}}" currentCity="{{city}}"></v-cascade> -->

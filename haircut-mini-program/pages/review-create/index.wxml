@@ -1,0 +1,76 @@
+<!--pages/review-create/index.wxml-->
+<view class="container">
+  <view></view>
+      <form bindsubmit="formSubmit">
+  <van-panel title="评价" desc="{{serveName}}" status="{{barberName}}" class="custom-class" >
+  <input name="sid" value="{{sid}}" hidden="true"></input>
+  <input name="uid" value="{{uid}}" hidden="true"></input>
+  <input name="bid" value="{{bid}}" hidden="true"></input>
+  <input name="serveName" value="{{serveName}}" hidden="true"></input>
+   <input name="customerName" value="{{customerName}}" hidden="true"></input>
+  <input name="customerAvatar" value="{{customerAvatar}}" hidden="true"></input>
+  <input name="barberName" value="{{barberName}}" hidden="true"></input>
+  <input name="aid" value="{{aid}}" hidden="true"></input>
+   <view id="reviewBox">
+   <view id="starRow">
+      <van-row>
+        <van-col span="3" offset="1">评分</van-col>
+        <van-col span="16" offset="2"> 
+            <i-rate 
+                bind:change="onChange1" 
+                value="{{stars}}" >
+            </i-rate>
+            <input name="stars" value="{{stars}}" hidden="true"></input>
+            </van-col>
+      </van-row>
+  </view>
+    <view id="titleRow">
+      <van-row>
+        <van-col span="3" offset="1">标题</van-col>
+        <van-col span="16" offset="2"> 
+            <van-cell-group>
+                <van-field
+                  value="{{ title }}"
+                  name="title"
+                  placeholder="请输入标题"
+                  border="{{ false }}"
+                  bind:change="onChange"
+                />
+              </van-cell-group>
+            </van-col>
+      </van-row>
+  </view>
+  <view id="stupidCell">
+        <van-cell-group>
+        <van-field
+          value="{{ message }}"
+          label="内容"
+          name="content"
+          type="textarea"
+          placeholder="请输入评价"
+          autosize
+          border="{{ false }}"
+        />
+      </van-cell-group>
+  </view>
+  <view id="pictureBox">
+      <view class="picture-text">晒图</view>
+      <view class="upload">
+      <van-uploader
+        file-list="{{ fileList }}"
+        max-count="1"
+        bind:delete="delete"
+        bind:after-read="afterRead"
+       image-fit="aspectFill"
+        />
+        <input name="photo" value="{{photo}}" hidden="true"></input>
+    </view>
+   </view>
+     </view>
+  </van-panel>
+<view class="buttonBox">
+  <!-- <i-button form-type="submit" bind:click="handleClick" type="primary">提交</i-button> -->
+  <button class="submitBtn" bindtap="disableIt" type="primary" form-type="submit">提交</button>
+</view>
+</form>
+</view>

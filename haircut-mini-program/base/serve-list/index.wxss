@@ -1,0 +1,92 @@
+.stylist{
+  padding:60rpx 30rpx 65rpx 35rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  position: relative
+}
+
+.avatar{
+  margin-right: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+ 
+}
+
+.stylist-msg {
+  display: flex;
+  flex-direction: column;
+}
+
+.stylist-name {
+  font-size: 38rpx;
+  padding-bottom: 15rpx;
+}
+
+.stylist-price{
+  display: flex;
+  margin-bottom: 40rpx;
+}
+
+.price-left{
+  margin-right: 13rpx;
+}
+
+.take-button{
+  position: absolute;
+  top:120rpx;
+  right: 30rpx;
+}
+
+.question{
+  margin-left: 12rpx;
+}
+
+.cutting-list{
+  padding-bottom: 15rpx;
+}
+.work-time{
+  color:#5a5a5a;
+}
+
+.select-stylist{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60rpx;
+}
+
+.select-stylist-info{
+  display: flex;
+  align-items: center;
+  
+}
+
+.select-stylist .info {
+  padding-left: 40rpx;
+  
+}
+
+.select-stylist .name {
+  font-size: 38rpx;
+}
+.select-stylist-price{
+  margin-top: 15rpx;
+}
+
+.select-store-name{
+  padding-top: 5rpx;
+}
+
+.select-stylist .address {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.select-stylist .distant {
+    margin-top: 22rpx;
+}
+
+.select-tip{
+  
+}
+
+

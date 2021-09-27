@@ -1,0 +1,22 @@
+
+<!-- <v-map full></v-map> -->
+<view class='scrollPage bg-white page'>
+  <v-grid col="3">
+
+  <v-grid-item>
+     <navigator class="" target="" url="../my-edit/index" hover-class="navigator-hover" open-type="navigate">
+      <v-grid-icon>
+        <v-icon type='default' icon='icon-file' size='55'></v-icon>
+      </v-grid-icon>
+      个人档案
+      </navigator>
+    </v-grid-item>
+
+    
+  </v-grid>
+
+  <v-modal show="{{showModal}}">Hello World!</v-modal>
+
+  <button bindtap='showModal'>按钮</button>
+
+</view>

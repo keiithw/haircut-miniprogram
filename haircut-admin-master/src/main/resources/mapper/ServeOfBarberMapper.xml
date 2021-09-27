@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haiyu.manager.dao.ServeOfBarberMapper" >
+  <resultMap id="BaseResultMap" type="com.haiyu.manager.pojo.ServeOfBarber" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="barber_id" property="barberId" jdbcType="INTEGER" />
+    <result column="serve_ids" property="serveIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, barber_id, serve_ids
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haiyu.manager.pojo.example.ServeOfBarberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from serve_of_barber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.haiyu.manager.pojo.example.ServeOfBarberExample" >
+    delete from serve_of_barber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haiyu.manager.pojo.ServeOfBarber" useGeneratedKeys="true" keyProperty="id" keyColumn="serve_of_barber">
+    insert into serve_of_barber (id, barber_id, serve_ids
+      )
+    values (#{id,jdbcType=INTEGER}, #{barberId,jdbcType=INTEGER}, #{serveIds,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.haiyu.manager.pojo.ServeOfBarber" useGeneratedKeys="true" keyProperty="id" keyColumn="serve_of_barber">
+    insert into serve_of_barber
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="barberId != null" >
+        barber_id,
+      </if>
+      <if test="serveIds != null" >
+        serve_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="barberId != null" >
+        #{barberId,jdbcType=INTEGER},
+      </if>
+      <if test="serveIds != null" >
+        #{serveIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haiyu.manager.pojo.example.ServeOfBarberExample" resultType="java.lang.Integer" >
+    select count(*) from serve_of_barber
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update serve_of_barber
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.barberId != null" >
+        barber_id = #{record.barberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.serveIds != null" >
+        serve_ids = #{record.serveIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update serve_of_barber
+    set id = #{record.id,jdbcType=INTEGER},
+      barber_id = #{record.barberId,jdbcType=INTEGER},
+      serve_ids = #{record.serveIds,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <select id="selectBarberWithServeList" parameterType="int"  resultType="com.haiyu.manager.response.ServeOfBarberResult">
+    select sob.*,u.sys_user_name as barber_name,u.sid from base_admin_user as u
+    left join serve_of_barber as sob
+    on sob.barber_id = u.id
+    where u.sid = #{sid} and u.id != #{id}
+  </select>
+</mapper>

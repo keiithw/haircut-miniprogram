@@ -1,0 +1,7 @@
+.v-grid{
+  width: 100%;
+  overflow:hidden;
+  display: inline-grid;
+  font-size: 28rpx;
+  background: white;
+}

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haiyu.manager.dao.WorkTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.haiyu.manager.pojo.WorkTime" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="barber_id" property="barberId" jdbcType="INTEGER" />
+    <result column="barber_name" property="barberName" jdbcType="VARCHAR" />
+    <result column="start" property="start" jdbcType="VARCHAR" />
+    <result column="end" property="end" jdbcType="VARCHAR" />
+    <result column="noon" property="noon" jdbcType="INTEGER" />
+    <result column="noon_name" property="noonName" jdbcType="VARCHAR" />
+    <result column="interval_max" property="intervalMax" jdbcType="INTEGER" />
+    <result column="all_day" property="allDay" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sid, title, barber_id, barber_name, start, end, noon, noon_name, interval_max, 
+    all_day
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haiyu.manager.pojo.example.WorkTimeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from work_time
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from work_time
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from work_time
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haiyu.manager.pojo.example.WorkTimeExample" >
+    delete from work_time
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haiyu.manager.pojo.WorkTime" >
+    insert into work_time (id, sid, title, 
+      barber_id, barber_name, start, 
+      end, noon, noon_name, 
+      interval_max, all_day)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{barberId,jdbcType=INTEGER}, #{barberName,jdbcType=VARCHAR}, #{start,jdbcType=VARCHAR}, 
+      #{end,jdbcType=VARCHAR}, #{noon,jdbcType=INTEGER}, #{noonName,jdbcType=VARCHAR}, 
+      #{intervalMax,jdbcType=INTEGER}, #{allDay,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haiyu.manager.pojo.WorkTime" >
+    insert into work_time
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="barberId != null" >
+        barber_id,
+      </if>
+      <if test="barberName != null" >
+        barber_name,
+      </if>
+      <if test="start != null" >
+        start,
+      </if>
+      <if test="end != null" >
+        end,
+      </if>
+      <if test="noon != null" >
+        noon,
+      </if>
+      <if test="noonName != null" >
+        noon_name,
+      </if>
+      <if test="intervalMax != null" >
+        interval_max,
+      </if>
+      <if test="allDay != null" >
+        all_day,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="barberId != null" >
+        #{barberId,jdbcType=INTEGER},
+      </if>
+      <if test="barberName != null" >
+        #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null" >
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="end != null" >
+        #{end,jdbcType=VARCHAR},
+      </if>
+      <if test="noon != null" >
+        #{noon,jdbcType=INTEGER},
+      </if>
+      <if test="noonName != null" >
+        #{noonName,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalMax != null" >
+        #{intervalMax,jdbcType=INTEGER},
+      </if>
+      <if test="allDay != null" >
+        #{allDay,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haiyu.manager.pojo.example.WorkTimeExample" resultType="java.lang.Integer" >
+    select count(*) from work_time
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update work_time
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barberId != null" >
+        barber_id = #{record.barberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.barberName != null" >
+        barber_name = #{record.barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.start != null" >
+        start = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.end != null" >
+        end = #{record.end,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noon != null" >
+        noon = #{record.noon,jdbcType=INTEGER},
+      </if>
+      <if test="record.noonName != null" >
+        noon_name = #{record.noonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intervalMax != null" >
+        interval_max = #{record.intervalMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.allDay != null" >
+        all_day = #{record.allDay,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update work_time
+    set id = #{record.id,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      barber_id = #{record.barberId,jdbcType=INTEGER},
+      barber_name = #{record.barberName,jdbcType=VARCHAR},
+      start = #{record.start,jdbcType=VARCHAR},
+      end = #{record.end,jdbcType=VARCHAR},
+      noon = #{record.noon,jdbcType=INTEGER},
+      noon_name = #{record.noonName,jdbcType=VARCHAR},
+      interval_max = #{record.intervalMax,jdbcType=INTEGER},
+      all_day = #{record.allDay,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haiyu.manager.pojo.WorkTime" >
+    update work_time
+    <set >
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="barberId != null" >
+        barber_id = #{barberId,jdbcType=INTEGER},
+      </if>
+      <if test="barberName != null" >
+        barber_name = #{barberName,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null" >
+        start = #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="end != null" >
+        end = #{end,jdbcType=VARCHAR},
+      </if>
+      <if test="noon != null" >
+        noon = #{noon,jdbcType=INTEGER},
+      </if>
+      <if test="noonName != null" >
+        noon_name = #{noonName,jdbcType=VARCHAR},
+      </if>
+      <if test="intervalMax != null" >
+        interval_max = #{intervalMax,jdbcType=INTEGER},
+      </if>
+      <if test="allDay != null" >
+        all_day = #{allDay,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haiyu.manager.pojo.WorkTime" >
+    update work_time
+    set sid = #{sid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      barber_id = #{barberId,jdbcType=INTEGER},
+      barber_name = #{barberName,jdbcType=VARCHAR},
+      start = #{start,jdbcType=VARCHAR},
+      end = #{end,jdbcType=VARCHAR},
+      noon = #{noon,jdbcType=INTEGER},
+      noon_name = #{noonName,jdbcType=VARCHAR},
+      interval_max = #{intervalMax,jdbcType=INTEGER},
+      all_day = #{allDay,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
